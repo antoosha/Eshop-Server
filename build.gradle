@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
+
+group 'korolov.project'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.springframework:spring-core:5.3.10'
+    implementation 'org.springframework:spring-context:5.3.10'
+    implementation 'org.springframework:spring-beans:5.3.10'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
+
+
+}
+
+/*test {
+    useJUnitPlatform()
+}*/
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'wayToMainClass'
+    }
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    } {
+        exclude "META-INF/*"
+    }
+}
