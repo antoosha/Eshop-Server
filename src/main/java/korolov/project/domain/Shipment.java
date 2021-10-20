@@ -1,8 +1,20 @@
 package korolov.project.domain;
 
+import org.springframework.context.annotation.Scope;
+
+@Scope("prototype")
 public class Shipment {
-    //CREATE addShipment /* if order is on way*/
-    //READ showShipment showAllShipments
-    //UPDATE editShipment /*for example, tracking number has been changed*/
-    //DELETE deleteShipment /*if client get his/her order*/
+    private final Order order;
+    private String clientAddress;
+
+    public Shipment(Order order, String clientAddress) {
+        this.order = order;
+        this.clientAddress = clientAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "Shipment{" + order + ", clientAddress='" + clientAddress + '\'' + '}';
+    }
 }
+

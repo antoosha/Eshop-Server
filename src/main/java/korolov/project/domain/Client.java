@@ -1,8 +1,9 @@
 package korolov.project.domain;
 
+import org.springframework.context.annotation.Scope;
 import java.util.Objects;
-import java.util.Optional;
 
+@Scope("prototype")
 public class Client {
     private String name;
     private String surname;
@@ -45,7 +46,7 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return username.equals(client.username) && email.equals(client.email);
+        return username.equals(client.username) || email.equals(client.email);
     }
 
     @Override
