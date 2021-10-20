@@ -9,9 +9,7 @@ import java.util.Optional;
 @Component
 public class ClientService extends AbstractCrudService<String, Client>{
     @Override
-    public void create(Client entity) throws EntityStateException {
-
-    }
+    public void create(Client entity) throws EntityStateException {}
 
     @Override
     public Optional<Client> readById(String id) {
@@ -24,13 +22,9 @@ public class ClientService extends AbstractCrudService<String, Client>{
     }
 
     @Override
-    public void update(Client entity) throws EntityStateException {
-
-    }
+    public void update(Client entity) throws EntityStateException {}
 
     @Override
-    public void deleteById(String id) {
-
-    }
+    public void deleteById(String id) {}
     //TODO business logic
 }
