@@ -6,11 +6,13 @@ import org.springframework.context.annotation.Scope;
 public class Product {
     private String productName;
     private double price;
+    private final String productCode;
 
 
-    public Product(String nameOfProduct, double price) {
+    public Product(String nameOfProduct, double price, String productCode) {
         this.productName = nameOfProduct;
         this.price = price;
+        this.productCode = productCode;
     }
 
     public String getProductName() {
@@ -29,8 +31,14 @@ public class Product {
         this.price = price;
     }
 
+    public String getProductCode() {
+        return productCode;
+    }
+
     @Override
     public String toString() {
         return "Product{" + "nameOfProduct='" + productName + '\'' + ", price=" + price + '}';
     }
+
+    //TODO Override equals and hashCode
 }

@@ -1,5 +1,7 @@
 package korolov.project.business;
 
-public class ShipmentService extends AbstractCrudService<,>{
+import korolov.project.domain.Shipment;
+
+public class ShipmentService extends AbstractCrudService<String, Shipment>{
     //TODO business logic
 }

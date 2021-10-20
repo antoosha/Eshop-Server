@@ -25,4 +25,6 @@ public class Order {
     public String toString() {
         return "Order{" + client + " " + product + "}";
     }
+
+    //TODO Override equals and hashCode
 }
