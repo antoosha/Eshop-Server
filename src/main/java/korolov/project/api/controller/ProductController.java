@@ -10,8 +10,13 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    //CREATE createProduct or addProduct
-    //READ showProduct showAllProducts
-    //UPDATE editProduct
-    //DELETE deleteProduct hideProduct/*if we dont want to delete but want to hide from all clients*/
+    //CREATE createProduct or addProduct POST
+
+    //READ showProduct showAllProducts GET
+
+    //UPDATE editProduct PUT
+
+    //DELETE deleteProduct hideProduct/*if we dont want to delete but want to hide from all clients*/ DELETE
+
+    //TODO implement controller
 }

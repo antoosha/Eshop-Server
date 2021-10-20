@@ -10,8 +10,13 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
-    //CREATE createOrder
-    //READ showOrder showAllOrders
-    //UPDATE editOrder /*change smth in order*/
-    //DELETE deleteOrder /*canceled*/
+    //CREATE createOrder POST
+
+    //READ showOrder showAllOrders GET
+
+    //UPDATE editOrder /*change smth in order*/ PUT
+
+    //DELETE deleteOrder /*canceled*/ DELETE
+
+    //TODO implement controller
 }

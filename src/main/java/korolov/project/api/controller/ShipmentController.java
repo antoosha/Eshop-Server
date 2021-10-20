@@ -10,8 +10,13 @@ public class ShipmentController {
     public ShipmentController(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }
-    //CREATE addShipment /* if order is on way*/
-    //READ showShipment showAllShipments
-    //UPDATE editShipment /*for example, tracking number has been changed*/
-    //DELETE deleteShipment /*if client get his/her order*/
+    //CREATE addShipment /* if order is on way*/ POST
+
+    //READ showShipment showAllShipments GET
+
+    //UPDATE editShipment /*for example, tracking number has been changed*/ PUT
+
+    //DELETE deleteShipment /*if client get his/her order*/ DELETE
+
+    //TODO implement controller
 }
