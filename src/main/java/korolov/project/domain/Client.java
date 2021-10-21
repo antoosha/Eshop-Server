@@ -1,18 +1,17 @@
 package korolov.project.domain;
 
+import org.springframework.context.annotation.Scope;
 import java.util.Objects;
-import java.util.Optional;
 
+@Scope("prototype")
 public class Client {
     private String name;
     private String surname;
-    private final String username;
     private String email;
 
-    public Client(String name, String surname, String username, String email) {
+    public Client(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
-        this.username = Objects.requireNonNull(username);
         this.email = Objects.requireNonNull(email);
     }
 
@@ -45,16 +44,16 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return username.equals(client.username) && email.equals(client.email);
+        return  email.equals(client.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, email);
+        return Objects.hash( email);
     }
 
     @Override
     public String toString() {
-        return "Client{" + name + " " +  surname + ", username='" + username + '\'' + ", email='" + email + '\'' + '}';
+        return "Client{" + name + " " +  surname + ", email='" + email + '\'' + '}';
     }
 }
