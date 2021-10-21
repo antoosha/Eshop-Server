@@ -18,7 +18,7 @@ public class ClientController {
         this.clientService = clientService;
     }
     //CREATE createClient /*new client*/ POST
-    @PostMapping("/users")
+    /*@PostMapping("/users")
     ClientDTO create(@RequestBody ClientDTO clientDTO) {
         try {
             clientService.create();
@@ -26,7 +26,7 @@ public class ClientController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists");
         }
         return getOne(clientDTO.getEmail());
-    }
+    }*/
 
     //READ showClient showAllClients GET
 
