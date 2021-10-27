@@ -4,11 +4,11 @@ import org.springframework.context.annotation.Scope;
 
 import java.util.Objects;
 
-@Scope("prototype")
+
 public class Product {
     private String productName;
     private double price;
-    private final String productId; // key in db
+    private final String productId; // primary key in db
 
 
     public Product(String nameOfProduct, double price, String productCode) {

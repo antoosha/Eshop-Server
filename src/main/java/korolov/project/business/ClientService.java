@@ -3,6 +3,7 @@ package korolov.project.business;
 import korolov.project.domain.Client;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class ClientService extends AbstractCrudService<String, Client>{
 
     @Override
     public Collection<Client> readAll() {
-        return null;
+        return new ArrayList<Client>();
     }
 
     @Override

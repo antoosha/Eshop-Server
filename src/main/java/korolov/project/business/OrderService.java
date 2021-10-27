@@ -4,6 +4,7 @@ import korolov.project.domain.Client;
 import korolov.project.domain.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public class OrderService extends AbstractCrudService<Client, Order>{
 
     @Override
     public Collection<Order> readAll() {
-        return null;
+        return new ArrayList<Order>();
     }
 
     @Override

@@ -3,11 +3,10 @@ package korolov.project.domain;
 import org.springframework.context.annotation.Scope;
 import java.util.Objects;
 
-@Scope("prototype")
 public class Client {
     private String name;
     private String surname;
-    private String email; // key in db
+    private String email; // primary key in db
 
     public Client(String name, String surname, String email) {
         this.name = name;
