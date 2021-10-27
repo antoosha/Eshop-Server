@@ -2,17 +2,19 @@ package korolov.project.domain;
 
 import org.springframework.context.annotation.Scope;
 
+import java.util.Objects;
+
 @Scope("prototype")
 public class Product {
     private String productName;
     private double price;
-    private final String productCode;
+    private final String productId; // key in db
 
 
     public Product(String nameOfProduct, double price, String productCode) {
         this.productName = nameOfProduct;
         this.price = price;
-        this.productCode = productCode;
+        this.productId = Objects.requireNonNull(productCode);
     }
 
     public String getProductName() {
@@ -32,13 +34,24 @@ public class Product {
     }
 
     public String getProductCode() {
-        return productCode;
+        return productId;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "nameOfProduct='" + productName + '\'' + ", price=" + price + '}';
+        return "Product{" + "nameOfProduct='" + productName + '\'' + ", price=" + price + "' productId='" + productId +'}';
     }
 
-    //TODO Override equals and hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return productId.equals(product.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
+    }
 }

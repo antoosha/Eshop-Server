@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Client {
     private String name;
     private String surname;
-    private String email;
+    private String email; // key in db
 
     public Client(String name, String surname, String email) {
         this.name = name;

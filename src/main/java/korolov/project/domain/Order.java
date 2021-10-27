@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Scope;
 @Scope("prototype")
 public class Order {
 
-    private Product product;
+    //private final long orderId; it is database id
     private final Client client;
+    private Product product;
 
     public Order(Product product, Client client) {
         this.product = product;
