@@ -36,5 +36,17 @@ public class Shipment {
         return "Shipment{" + order + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shipment shipment = (Shipment) o;
+        return trackingNumber == shipment.trackingNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trackingNumber);
+    }
 }
 

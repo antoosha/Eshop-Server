@@ -3,12 +3,16 @@ package korolov.project.business;
 import korolov.project.domain.Client;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 @Component
 public class ClientService extends AbstractCrudService<String, Client>{
+
+    //TODO business logic
+
     @Override
     public void create(Client entity) throws EntityStateException {}
 
@@ -19,7 +23,7 @@ public class ClientService extends AbstractCrudService<String, Client>{
 
     @Override
     public Collection<Client> readAll() {
-        return new ArrayList<Client>();
+        return Collections.emptyList();
     }
 
     @Override
@@ -27,5 +31,4 @@ public class ClientService extends AbstractCrudService<String, Client>{
 
     @Override
     public void deleteById(String id) {}
-    //TODO business logic
 }

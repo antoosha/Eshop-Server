@@ -1,6 +1,8 @@
 package korolov.project.domain;
 
 
+import java.util.Objects;
+
 public class Order {
 
     private final long orderId; //it is database id
@@ -26,5 +28,16 @@ public class Order {
         return "Order{" + client + " " + product + "}";
     }
 
-    //TODO Override equals and hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderId == order.orderId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
+    }
 }

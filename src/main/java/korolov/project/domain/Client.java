@@ -11,7 +11,7 @@ public class Client {
     public Client(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
-        this.email = Objects.requireNonNull(email);
+        this.email = email;
     }
 
     public String getName() {

@@ -6,10 +6,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 @Component
 public class OrderService extends AbstractCrudService<Client, Order>{
+
+    //TODO business logic
+
     @Override
     public void create(Order entity) throws EntityStateException {}
 
@@ -20,7 +24,7 @@ public class OrderService extends AbstractCrudService<Client, Order>{
 
     @Override
     public Collection<Order> readAll() {
-        return new ArrayList<Order>();
+        return Collections.emptyList();
     }
 
     @Override
@@ -28,5 +32,4 @@ public class OrderService extends AbstractCrudService<Client, Order>{
 
     @Override
     public void deleteById(Client id) {}
-    //TODO business logic
 }
