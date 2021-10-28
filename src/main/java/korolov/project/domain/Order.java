@@ -11,8 +11,8 @@ public class Order {
 
     public Order(long orderId, Product product, Client client) {
         this.orderId = orderId;
-        this.product = product;
-        this.client = client;
+        this.product = Objects.requireNonNull(product);
+        this.client = Objects.requireNonNull(client);
     }
 
     public Product getProduct() {

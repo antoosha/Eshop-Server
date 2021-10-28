@@ -10,7 +10,7 @@ public class Shipment {
     private final long trackingNumber; // primary key in db
 
     public Shipment(Order order, String clientAddress, long trackingNumber) {
-        this.order = order;
+        this.order = Objects.requireNonNull(order);
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
     }
