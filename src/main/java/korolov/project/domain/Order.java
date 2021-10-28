@@ -6,8 +6,8 @@ import java.util.Objects;
 public class Order {
 
     private final long orderId; //it is database id
-    private final Client client;
-    private Product product;
+    private final Client client; // will be better to have here Client email, but not a Client instance!
+    private Product product; //should be list of Products or list of codes of products !!
 
     public Order(long orderId, Product product, Client client) {
         this.orderId = orderId;
@@ -21,6 +21,14 @@ public class Order {
 
     public Client getClient() {
         return client;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

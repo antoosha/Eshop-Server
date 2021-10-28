@@ -3,7 +3,7 @@ package korolov.project.api.dto;
 import korolov.project.domain.Order;
 
 public class ShipmentDTO {
-    public final Order order;
+    public final Order order; // probably will be better to have here just order id, without all Order instance
     public String clientAddress;
     public final long trackingNumber;
 

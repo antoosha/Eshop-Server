@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Scope;
 import java.util.Objects;
 
 public class Shipment {
-    private final Order order;
+    private final Order order; // probably will be better to have here just order id, without all Order instance
     private String clientAddress;
     private final long trackingNumber; // primary key in db
 
