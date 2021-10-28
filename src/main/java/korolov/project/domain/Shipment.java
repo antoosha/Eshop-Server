@@ -1,7 +1,5 @@
 package korolov.project.domain;
 
-import org.springframework.context.annotation.Scope;
-
 import java.util.Objects;
 
 public class Shipment {
@@ -33,7 +31,7 @@ public class Shipment {
 
     @Override
     public String toString() {
-        return "Shipment{" + orderId + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
+        return "Shipment{OrderId: " + orderId + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
     }
 
     @Override

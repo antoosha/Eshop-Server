@@ -1,8 +1,5 @@
 package korolov.project.api.dto;
 
-import korolov.project.domain.Client;
-import korolov.project.domain.Product;
-
 import java.util.Collection;
 
 public class OrderDTO {

@@ -1,7 +1,5 @@
 package korolov.project.api.dto;
 
-import java.util.Objects;
-
 public class ClientDTO {
     public String name;
     public String surname;

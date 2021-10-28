@@ -1,20 +1,18 @@
 package korolov.project.api.dto;
 
-import korolov.project.domain.Order;
-
 public class ShipmentDTO {
-    public final Order order; // probably will be better to have here just order id, without all Order instance
+    public final long orderId;
     public String clientAddress;
     public final long trackingNumber;
 
-    public ShipmentDTO(Order order, String clientAddress, long trackingNumber) {
-        this.order = order;
+    public ShipmentDTO(long orderId, String clientAddress, long trackingNumber) {
+        this.orderId = orderId;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
     }
 
-    public Order getOrder() {
-        return order;
+    public long getOrderId() {
+        return orderId;
     }
 
     public String getClientAddress() {

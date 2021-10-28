@@ -1,6 +1,5 @@
 package korolov.project.domain;
 
-import org.springframework.context.annotation.Scope;
 import java.util.Objects;
 
 public class Client {
