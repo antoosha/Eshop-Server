@@ -1,39 +1,45 @@
 package korolov.project.domain;
 
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Order {
 
     private final long orderId; //it is database id
-    private final Client client; // will be better to have here Client email, but not a Client instance!
-    private Product product; //should be list of Products or list of codes of products !!
+    private final String clientEmail;
+    private Collection<String> products;
 
-    public Order(long orderId, Product product, Client client) {
+    public Order(long orderId, String clientEmail, Collection<String> products) {
         this.orderId = orderId;
-        this.product = Objects.requireNonNull(product);
-        this.client = Objects.requireNonNull(client);
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Client getClient() {
-        return client;
+        this.clientEmail = clientEmail;
+        this.products.addAll(products); // may be a problem
     }
 
     public long getOrderId() {
         return orderId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public Collection<String> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Collection<String> products) {
+        this.products.addAll(products); // may be a problem
     }
 
     @Override
     public String toString() {
-        return "Order{" + client + " " + product + "}";
+        return "Order{" +
+                "orderId=" + orderId +
+                ", clientEmail='" + clientEmail + '\'' +
+                ", products={" + products.stream().toString() + //???
+                "}}";
     }
 
     @Override

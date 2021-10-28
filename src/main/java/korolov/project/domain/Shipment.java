@@ -5,18 +5,14 @@ import org.springframework.context.annotation.Scope;
 import java.util.Objects;
 
 public class Shipment {
-    private final Order order; // probably will be better to have here just order id, without all Order instance
+    private final long orderId;
     private String clientAddress;
     private final long trackingNumber; // primary key in db
 
-    public Shipment(Order order, String clientAddress, long trackingNumber) {
-        this.order = Objects.requireNonNull(order);
+    public Shipment(long orderId, String clientAddress, long trackingNumber) {
+        this.orderId = orderId;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
-    }
-
-    public Order getOrder() {
-        return order;
     }
 
     public String getClientAddress() {
@@ -31,9 +27,13 @@ public class Shipment {
         this.clientAddress = clientAddress;
     }
 
+    public long getOrderId() {
+        return orderId;
+    }
+
     @Override
     public String toString() {
-        return "Shipment{" + order + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
+        return "Shipment{" + orderId + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
     }
 
     @Override
