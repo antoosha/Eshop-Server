@@ -13,7 +13,7 @@ public class Order {
     public Order(long orderId, String clientEmail, Collection<String> products) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
-        this.products.addAll(products); // may be a problem
+        this.products = products; //may be a problem
     }
 
     public long getOrderId() {
@@ -29,7 +29,7 @@ public class Order {
     }
 
     public void setProducts(Collection<String> products) {
-        this.products.addAll(products); // may be a problem
+        this.products = products; //may be a problem
     }
 
     @Override

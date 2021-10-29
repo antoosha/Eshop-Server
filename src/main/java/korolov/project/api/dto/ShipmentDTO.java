@@ -1,9 +1,9 @@
 package korolov.project.api.dto;
 
 public class ShipmentDTO {
-    public final long orderId;
+    public long orderId;
     public String clientAddress;
-    public final long trackingNumber;
+    public long trackingNumber; //id in database
 
     public ShipmentDTO(long orderId, String clientAddress, long trackingNumber) {
         this.orderId = orderId;

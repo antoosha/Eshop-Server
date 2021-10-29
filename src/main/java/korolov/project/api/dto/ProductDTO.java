@@ -3,7 +3,7 @@ package korolov.project.api.dto;
 public class ProductDTO {
     public String productName;
     public double price;
-    public final String productId;
+    public String productId;
 
     public ProductDTO(String productName, double price, String productId) {
         this.productName = productName;

@@ -4,7 +4,6 @@ import korolov.project.api.converter.ClientConverter;
 import korolov.project.api.dto.ClientDTO;
 import korolov.project.business.ClientService;
 import korolov.project.business.EntityStateException;
-import korolov.project.domain.Client;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
