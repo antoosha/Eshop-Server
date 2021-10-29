@@ -8,11 +8,10 @@ public class Product {
     private double price;
     private final String productId; // primary key in db
 
-
-    public Product(String nameOfProduct, double price, String productCode) {
-        this.productName = nameOfProduct;
+    public Product(String productName, double price, String productId) {
+        this.productName = productName;
         this.price = price;
-        this.productId = Objects.requireNonNull(productCode);
+        this.productId = productId;
     }
 
     public String getProductName() {
@@ -31,7 +30,7 @@ public class Product {
         this.price = price;
     }
 
-    public String getProductCode() {
+    public String getProductId() {
         return productId;
     }
 

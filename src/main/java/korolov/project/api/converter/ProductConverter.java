@@ -10,7 +10,7 @@ public class ProductConverter {
         return new Product(productDTO.getProductName(), productDTO.getPrice(), productDTO.getProductId());
     }
     public static ProductDTO fromModel(Product product) {
-        return new ProductDTO(product.getProductName(), product.getPrice(), product.getProductCode());
+        return new ProductDTO(product.getProductName(), product.getPrice(), product.getProductId());
     }
     public static Collection<Product> toModels(Collection<ProductDTO> productDTOs) {
         return productDTOs.stream().map(ProductConverter::toModel).toList();
