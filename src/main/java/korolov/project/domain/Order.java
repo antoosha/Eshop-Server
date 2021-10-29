@@ -1,30 +1,56 @@
 package korolov.project.domain;
 
-import org.springframework.context.annotation.Scope;
 
-@Scope("prototype")
+import java.util.Collection;
+import java.util.Objects;
+
 public class Order {
 
-    private Product product;
-    private final Client client;
+    private final long orderId; //it is database id
+    private final String clientEmail;
+    private Collection<String> products;
 
-    public Order(Product product, Client client) {
-        this.product = product;
-        this.client = client;
+    public Order(long orderId, String clientEmail, Collection<String> products) {
+        this.orderId = orderId;
+        this.clientEmail = clientEmail;
+        this.products = products; //may be a problem
     }
 
-    public Product getProduct() {
-        return product;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public Client getClient() {
-        return client;
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public Collection<String> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Collection<String> products) {
+        this.products = products; //may be a problem
     }
 
     @Override
     public String toString() {
-        return "Order{" + client + " " + product + "}";
+        return "Order{" +
+                "orderId=" + orderId +
+                ", clientEmail='" + clientEmail + '\'' +
+                ", products={" + products.stream().toString() + //???
+                "}}";
     }
 
-    //TODO Override equals and hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderId == order.orderId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
+    }
 }

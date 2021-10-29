@@ -1,18 +1,17 @@
 package korolov.project.domain;
 
-import org.springframework.context.annotation.Scope;
+import java.util.Objects;
 
-@Scope("prototype")
+
 public class Product {
     private String productName;
     private double price;
-    private final String productCode;
+    private final String productId; // primary key in db
 
-
-    public Product(String nameOfProduct, double price, String productCode) {
-        this.productName = nameOfProduct;
+    public Product(String productName, double price, String productId) {
+        this.productName = productName;
         this.price = price;
-        this.productCode = productCode;
+        this.productId = productId;
     }
 
     public String getProductName() {
@@ -31,14 +30,25 @@ public class Product {
         this.price = price;
     }
 
-    public String getProductCode() {
-        return productCode;
+    public String getProductId() {
+        return productId;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "nameOfProduct='" + productName + '\'' + ", price=" + price + '}';
+        return "Product{" + "nameOfProduct='" + productName + '\'' + ", price=" + price + "' productId='" + productId +'}';
     }
 
-    //TODO Override equals and hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return productId.equals(product.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
+    }
 }

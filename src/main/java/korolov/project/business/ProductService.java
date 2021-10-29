@@ -1,13 +1,19 @@
 package korolov.project.business;
 
+import korolov.project.domain.Client;
 import korolov.project.domain.Product;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 @Component
 public class ProductService extends AbstractCrudService<String, Product>{
+
+    //TODO business logic
+
     @Override
     public void create(Product entity) throws EntityStateException {}
 
@@ -18,7 +24,7 @@ public class ProductService extends AbstractCrudService<String, Product>{
 
     @Override
     public Collection<Product> readAll() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -26,5 +32,4 @@ public class ProductService extends AbstractCrudService<String, Product>{
 
     @Override
     public void deleteById(String id) {}
-    //TODO business logic
 }

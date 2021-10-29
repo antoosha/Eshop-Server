@@ -1,33 +1,23 @@
 package korolov.project.domain;
 
-import org.springframework.context.annotation.Scope;
+import java.util.Objects;
 
-@Scope("prototype")
 public class Shipment {
-    private final Order order;
+    private final long orderId;
     private String clientAddress;
-    private final String trackingNumber;
+    private final long trackingNumber; // primary key in db
 
-    public Shipment(Order order, String clientAddress, String trackingNumber) {
-        this.order = order;
+    public Shipment(long orderId, String clientAddress, long trackingNumber) {
+        this.orderId = orderId;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "Shipment{" + order + ", clientAddress='" + clientAddress + '\'' + '}';
-    }
-
-    public Order getOrder() {
-        return order;
     }
 
     public String getClientAddress() {
         return clientAddress;
     }
 
-    public String getTrackingNumber() {
+    public long getTrackingNumber() {
         return trackingNumber;
     }
 
@@ -35,6 +25,26 @@ public class Shipment {
         this.clientAddress = clientAddress;
     }
 
-    //TODO Override equals and hashCode
+    public long getOrderId() {
+        return orderId;
+    }
+
+    @Override
+    public String toString() {
+        return "Shipment{OrderId: " + orderId + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shipment shipment = (Shipment) o;
+        return trackingNumber == shipment.trackingNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trackingNumber);
+    }
 }
 
