@@ -17,12 +17,13 @@ public class ShipmentController {
     public ShipmentController(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
     }
+
     //CREATE addShipment /* if order is on way*/ POST
     @PostMapping("/shipments")
-    ShipmentDTO create(@RequestBody ShipmentDTO shipmentDTO){
-        try{
+    ShipmentDTO create(@RequestBody ShipmentDTO shipmentDTO) {
+        try {
             shipmentService.create(ShipmentConverter.toModel(shipmentDTO));
-        } catch (EntityStateException e){
+        } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment already exists");
         }
         return getOne(shipmentDTO.getTrackingNumber());
@@ -45,7 +46,7 @@ public class ShipmentController {
     //UPDATE editShipment /*for example, tracking number has been changed*/ PUT
     @PutMapping("/shipments/{id}")
     ShipmentDTO update(@PathVariable long id, @RequestBody ShipmentDTO shipmentDTO) {
-        if(shipmentDTO.getTrackingNumber() != id)
+        if (shipmentDTO.getTrackingNumber() != id)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment ids do not match");
         try {
             shipmentService.update(ShipmentConverter.toModel(shipmentDTO));
@@ -58,7 +59,7 @@ public class ShipmentController {
     //DELETE deleteShipment /*if client get his/her order*/ DELETE
     @DeleteMapping("/shipments/{id}")
     void delete(@PathVariable long id) {
-        if(shipmentService.readById(id).isEmpty()){
+        if (shipmentService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shipment not found");
         }
         shipmentService.deleteById(id);

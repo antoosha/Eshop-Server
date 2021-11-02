@@ -5,31 +5,38 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class Order {
+    private long orderId; //it is database id
+    private String clientEmail;
+    private Collection<Product> products;
 
-    private final long orderId; //it is database id
-    private final String clientEmail;
-    private Collection<String> products;
-
-    public Order(long orderId, String clientEmail, Collection<String> products) {
+    public Order(long orderId, String clientEmail, Collection<Product> products) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
-        this.products = products; //may be a problem
+        this.products = products;
     }
 
     public long getOrderId() {
         return orderId;
     }
 
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
     public String getClientEmail() {
         return clientEmail;
     }
 
-    public Collection<String> getProducts() {
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
+
+    public Collection<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Collection<String> products) {
-        this.products = products; //may be a problem
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -37,7 +44,7 @@ public class Order {
         return "Order{" +
                 "orderId=" + orderId +
                 ", clientEmail='" + clientEmail + '\'' +
-                ", products={" + products.stream().toString() + //???
+                ", products={" + products.stream().map(Product::toString) +
                 "}}";
     }
 

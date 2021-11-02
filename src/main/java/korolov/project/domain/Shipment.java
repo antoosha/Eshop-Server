@@ -3,35 +3,43 @@ package korolov.project.domain;
 import java.util.Objects;
 
 public class Shipment {
-    private final long orderId;
+    private Order order;
     private String clientAddress;
-    private final long trackingNumber; // primary key in db
+    private long trackingNumber; // primary key in db
 
-    public Shipment(long orderId, String clientAddress, long trackingNumber) {
-        this.orderId = orderId;
+    public Shipment(Order order, String clientAddress, long trackingNumber) {
+        this.order = order;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getClientAddress() {
         return clientAddress;
     }
 
-    public long getTrackingNumber() {
-        return trackingNumber;
-    }
-
     public void setClientAddress(String clientAddress) {
         this.clientAddress = clientAddress;
     }
 
-    public long getOrderId() {
-        return orderId;
+    public long getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    public void setTrackingNumber(long trackingNumber) {
+        this.trackingNumber = trackingNumber;
     }
 
     @Override
     public String toString() {
-        return "Shipment{OrderId: " + orderId + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
+        return "Shipment{" + order + ", clientAddress='" + clientAddress + '\'' + ", trackingNumber='" + trackingNumber + '}';
     }
 
     @Override

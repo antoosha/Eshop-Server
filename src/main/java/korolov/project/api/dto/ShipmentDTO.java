@@ -1,18 +1,27 @@
 package korolov.project.api.dto;
 
-public class ShipmentDTO {
-    public long orderId;
-    public String clientAddress;
-    public long trackingNumber; //id in database
+import korolov.project.domain.Order;
 
-    public ShipmentDTO(long orderId, String clientAddress, long trackingNumber) {
-        this.orderId = orderId;
+public class ShipmentDTO {
+    public Order order;
+    public String clientAddress;
+    public long trackingNumber; // primary key in db
+
+    public ShipmentDTO(Order order, String clientAddress, long trackingNumber) {
+        this.order = order;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
     }
 
-    public long getOrderId() {
-        return orderId;
+    public ShipmentDTO() {
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getClientAddress() {
@@ -25,5 +34,9 @@ public class ShipmentDTO {
 
     public long getTrackingNumber() {
         return trackingNumber;
+    }
+
+    public void setTrackingNumber(long trackingNumber) {
+        this.trackingNumber = trackingNumber;
     }
 }

@@ -21,9 +21,9 @@ public class ProductController {
     //CREATE createProduct or addProduct POST
     @PostMapping("/products")
     ProductDTO create(@RequestBody ProductDTO productDTO) {
-        try{
+        try {
             productService.create(ProductConverter.toModel(productDTO));
-        } catch (EntityStateException e){
+        } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product already exists");
         }
         return getOne(productDTO.getProductId());
@@ -37,7 +37,7 @@ public class ProductController {
 
     //READ showProduct GET
     @GetMapping("/products/{id}")
-    ProductDTO getOne(@PathVariable String id) {
+    ProductDTO getOne(@PathVariable long id) {
         return ProductConverter.fromModel(productService.readById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found")
         ));
@@ -45,8 +45,8 @@ public class ProductController {
 
     //UPDATE editProduct PUT
     @PutMapping("/products/{id}")
-    ProductDTO update(@PathVariable String id, @RequestBody ProductDTO productDTO) {
-        if(!productDTO.getProductId().equals(id))
+    ProductDTO update(@PathVariable long id, @RequestBody ProductDTO productDTO) {
+        if (productDTO.getProductId() != id)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product ids do not match");
         try {
             productService.update(ProductConverter.toModel(productDTO));
@@ -58,8 +58,8 @@ public class ProductController {
 
     //DELETE deleteProduct hideProduct/*if we dont want to delete but want to hide from all clients*/ DELETE
     @DeleteMapping("/products/{id}")
-    void delete(@PathVariable String id) {
-        if(productService.readById(id).isEmpty()){
+    void delete(@PathVariable long id) {
+        if (productService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
         productService.deleteById(id);

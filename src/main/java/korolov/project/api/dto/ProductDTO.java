@@ -3,12 +3,15 @@ package korolov.project.api.dto;
 public class ProductDTO {
     public String productName;
     public double price;
-    public String productId;
+    public long productId; // primary key in db
 
-    public ProductDTO(String productName, double price, String productId) {
+    public ProductDTO(String productName, double price, long productId) {
         this.productName = productName;
         this.price = price;
         this.productId = productId;
+    }
+
+    public ProductDTO() {
     }
 
     public String getProductName() {
@@ -27,7 +30,11 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public String getProductId() {
+    public long getProductId() {
         return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 }

@@ -3,12 +3,15 @@ package korolov.project.api.dto;
 public class ClientDTO {
     public String name;
     public String surname;
-    public String email;
+    public String email; // primary key in db
 
     public ClientDTO(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+    }
+
+    public ClientDTO() {
     }
 
     public String getName() {
@@ -26,6 +29,7 @@ public class ClientDTO {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
     public String getEmail() {
         return email;
     }
@@ -33,5 +37,4 @@ public class ClientDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }
