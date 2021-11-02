@@ -1,0 +1,35 @@
+GET http://localhost:8080/clients
+Accept: application/json
+
+###
+GET http://localhost:8080/clients/emailExample@gmail.com
+Accept: application/json
+
+###
+POST http://localhost:8080/clients
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Anton",
+  "surname": "Korolov",
+  "email":"emailExample@gmail.com"
+}
+
+###
+PUT http://localhost:8080/clients/emailExample@gmail.com
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Anton",
+  "surname": "Korolov",
+  "email":"emailExample@gmail.com"
+}
+
+###
+DELETE http://localhost:8080/clients/emailExample@gmail.com
+#Accept: application/json
+
+
+
