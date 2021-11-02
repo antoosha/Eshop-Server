@@ -15,7 +15,8 @@ public class OrderDTO {
         this.products = products;
     }
 
-    public OrderDTO(){}
+    public OrderDTO() {
+    }
 
     public long getOrderId() {
         return orderId;

@@ -11,7 +11,8 @@ public class ClientDTO {
         this.email = email;
     }
 
-    public ClientDTO(){}
+    public ClientDTO() {
+    }
 
     public String getName() {
         return name;

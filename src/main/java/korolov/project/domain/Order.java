@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class Order {
-
     private long orderId; //it is database id
     private String clientEmail;
     private Collection<Product> products;

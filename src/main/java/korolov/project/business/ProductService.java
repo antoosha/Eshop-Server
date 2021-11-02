@@ -10,12 +10,13 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Component
-public class ProductService extends AbstractCrudService<Long, Product>{
+public class ProductService extends AbstractCrudService<Long, Product> {
 
     //TODO business logic
 
     @Override
-    public void create(Product entity) throws EntityStateException {}
+    public void create(Product entity) throws EntityStateException {
+    }
 
     @Override
     public Optional<Product> readById(Long id) {
@@ -28,8 +29,10 @@ public class ProductService extends AbstractCrudService<Long, Product>{
     }
 
     @Override
-    public void update(Product entity) throws EntityStateException {}
+    public void update(Product entity) throws EntityStateException {
+    }
 
     @Override
-    public void deleteById(Long id) {}
+    public void deleteById(Long id) {
+    }
 }

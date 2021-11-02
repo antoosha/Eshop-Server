@@ -42,16 +42,16 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return  email.equals(client.email);
+        return email.equals(client.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( email);
+        return Objects.hash(email);
     }
 
     @Override
     public String toString() {
-        return "Client{" + name + " " +  surname + ", email='" + email + '\'' + '}';
+        return "Client{" + name + " " + surname + ", email='" + email + '\'' + '}';
     }
 }

@@ -13,7 +13,8 @@ public class ShipmentDTO {
         this.trackingNumber = trackingNumber;
     }
 
-    public ShipmentDTO() {}
+    public ShipmentDTO() {
+    }
 
     public Order getOrder() {
         return order;

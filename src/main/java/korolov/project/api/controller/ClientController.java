@@ -22,9 +22,9 @@ public class ClientController {
     //CREATE createClient /*new client*/ POST
     @PostMapping("/clients")
     ClientDTO create(@RequestBody ClientDTO clientDTO) {
-        try{
+        try {
             clientService.create(ClientConverter.toModel(clientDTO));
-        } catch (EntityStateException e){
+        } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client already exists");
         }
         return getOne(clientDTO.getEmail());
@@ -47,7 +47,7 @@ public class ClientController {
     //UPDATE editClient /*edit client info*/ PUT
     @PutMapping("/clients/{id}")
     ClientDTO update(@PathVariable String id, @RequestBody ClientDTO clientDTO) {
-        if(!clientDTO.getEmail().equals(id))
+        if (!clientDTO.getEmail().equals(id))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client ids do not match");
         try {
             clientService.update(ClientConverter.toModel(clientDTO));
@@ -60,7 +60,7 @@ public class ClientController {
     //DELETE deleteClient DELETE
     @DeleteMapping("/clients/{id}")
     void delete(@PathVariable String id) {
-        if(clientService.readById(id).isEmpty()){
+        if (clientService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
         }
         clientService.deleteById(id);

@@ -1,11 +1,12 @@
+### Get all clients
 GET http://localhost:8080/clients
 Accept: application/json
 
-###
+### Get one client with email emailExample@gmail.com
 GET http://localhost:8080/clients/emailExample@gmail.com
 Accept: application/json
 
-###
+### Create a client
 POST http://localhost:8080/clients
 Accept: application/json
 Content-Type: application/json
@@ -16,7 +17,7 @@ Content-Type: application/json
   "email":"emailExample@gmail.com"
 }
 
-###
+### Update a client with email emailExample@gmail.com
 PUT http://localhost:8080/clients/emailExample@gmail.com
 Accept: application/json
 Content-Type: application/json
@@ -27,9 +28,9 @@ Content-Type: application/json
   "email":"emailExample@gmail.com"
 }
 
-###
+### Delete a client with email emailExample@gmail.com
 DELETE http://localhost:8080/clients/emailExample@gmail.com
-#Accept: application/json
+Accept: application/json
 
 
 

@@ -1,0 +1,36 @@
+### Get all orders
+GET http://localhost:8080/orders
+Accept: application/json
+
+### Get one order with id 0
+GET http://localhost:8080/orders/0
+Accept: application/json
+
+### Create an order
+POST http://localhost:8080/orders
+Accept: application/json
+Content-Type: application/json
+
+{
+  "orderId": 0,
+  "clientEmail": "emailExample@gmail.com",
+  "products":[]
+}
+
+### Update an order with id 0
+PUT http://localhost:8080/orders/0
+Accept: application/json
+Content-Type: application/json
+
+{
+  "orderId": 0,
+  "clientEmail": "emailExample@gmail.com",
+  "products":[]
+}
+
+### Delete an order with id 0
+DELETE http://localhost:8080/orders/0
+Accept: application/json
+
+
+

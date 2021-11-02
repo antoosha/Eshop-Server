@@ -18,12 +18,13 @@ public class OrderController {
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
     //CREATE createOrder POST
     @PostMapping("/orders")
     OrderDTO create(@RequestBody OrderDTO orderDTO) {
-        try{
+        try {
             orderService.create(OrderConverter.toModel(orderDTO));
-        } catch (EntityStateException e){
+        } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already exists");
         }
         return getOne(orderDTO.getOrderId());
@@ -46,7 +47,7 @@ public class OrderController {
     //UPDATE editOrder /*change smth in order*/ PUT
     @PutMapping("/orders/{id}")
     OrderDTO update(@PathVariable long id, @RequestBody OrderDTO orderDTO) {
-        if(id != orderDTO.getOrderId())
+        if (id != orderDTO.getOrderId())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ids do not match");
         try {
             orderService.update(OrderConverter.toModel(orderDTO));
@@ -59,7 +60,7 @@ public class OrderController {
     //DELETE deleteOrder /*canceled*/ DELETE
     @DeleteMapping("/orders/{id}")
     void delete(@PathVariable long id) {
-        if(orderService.readById(id).isEmpty()){
+        if (orderService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
         }
         orderService.deleteById(id);
