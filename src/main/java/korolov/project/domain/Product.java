@@ -6,9 +6,9 @@ import java.util.Objects;
 public class Product {
     private String productName;
     private double price;
-    private long productId; // primary key in db
+    private Long productId; // primary key in db
 
-    public Product(String productName, double price, long productId) {
+    public Product(String productName, double price, Long productId) {
         this.productName = productName;
         this.price = price;
         this.productId = productId;
@@ -30,11 +30,11 @@ public class Product {
         this.price = price;
     }
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -48,7 +48,7 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productId == product.productId;
+        return productId.equals(product.productId);
     }
 
     @Override

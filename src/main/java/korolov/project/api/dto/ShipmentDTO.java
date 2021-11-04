@@ -5,9 +5,9 @@ import korolov.project.domain.Order;
 public class ShipmentDTO {
     public Order order;
     public String clientAddress;
-    public long trackingNumber; // primary key in db
+    public Long trackingNumber; // primary key in db
 
-    public ShipmentDTO(Order order, String clientAddress, long trackingNumber) {
+    public ShipmentDTO(Order order, String clientAddress, Long trackingNumber) {
         this.order = order;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
@@ -32,11 +32,11 @@ public class ShipmentDTO {
         this.clientAddress = clientAddress;
     }
 
-    public long getTrackingNumber() {
+    public Long getTrackingNumber() {
         return trackingNumber;
     }
 
-    public void setTrackingNumber(long trackingNumber) {
+    public void setTrackingNumber(Long trackingNumber) {
         this.trackingNumber = trackingNumber;
     }
 }

@@ -3,9 +3,9 @@ package korolov.project.api.dto;
 public class ProductDTO {
     public String productName;
     public double price;
-    public long productId; // primary key in db
+    public Long productId; // primary key in db
 
-    public ProductDTO(String productName, double price, long productId) {
+    public ProductDTO(String productName, double price, Long productId) {
         this.productName = productName;
         this.price = price;
         this.productId = productId;
@@ -30,11 +30,11 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 }

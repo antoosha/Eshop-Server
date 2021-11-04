@@ -5,21 +5,21 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class Order {
-    private long orderId; //it is database id
+    private Long orderId; //it is database id
     private String clientEmail;
     private Collection<Product> products;
 
-    public Order(long orderId, String clientEmail, Collection<Product> products) {
+    public Order(Long orderId, String clientEmail, Collection<Product> products) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
         this.products = products;
     }
 
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
@@ -53,7 +53,7 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return orderId == order.orderId;
+        return orderId.equals(order.orderId);
     }
 
     @Override
