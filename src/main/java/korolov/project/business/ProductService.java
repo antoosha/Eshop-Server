@@ -3,6 +3,7 @@ package korolov.project.business;
 import korolov.project.domain.Client;
 import korolov.project.domain.Product;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class ProductService extends AbstractCrudService<Long, Product> {
 
     //TODO business logic
