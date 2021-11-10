@@ -5,11 +5,11 @@ import korolov.project.domain.Product;
 import java.util.Collection;
 
 public class OrderDTO {
-    public long orderId; //it is database id
+    public Long orderId; //it is database id
     public String clientEmail;
     public Collection<Product> products;
 
-    public OrderDTO(long orderId, String clientEmail, Collection<Product> products) {
+    public OrderDTO(Long orderId, String clientEmail, Collection<Product> products) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
         this.products = products;
@@ -18,11 +18,11 @@ public class OrderDTO {
     public OrderDTO() {
     }
 
-    public long getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(long orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

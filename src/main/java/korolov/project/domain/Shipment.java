@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Shipment {
     private Order order;
     private String clientAddress;
-    private long trackingNumber; // primary key in db
+    private Long trackingNumber; // primary key in db
 
-    public Shipment(Order order, String clientAddress, long trackingNumber) {
+    public Shipment(Order order, String clientAddress, Long trackingNumber) {
         this.order = order;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
@@ -29,11 +29,11 @@ public class Shipment {
         this.clientAddress = clientAddress;
     }
 
-    public long getTrackingNumber() {
+    public Long getTrackingNumber() {
         return trackingNumber;
     }
 
-    public void setTrackingNumber(long trackingNumber) {
+    public void setTrackingNumber(Long trackingNumber) {
         this.trackingNumber = trackingNumber;
     }
 
@@ -47,7 +47,7 @@ public class Shipment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shipment shipment = (Shipment) o;
-        return trackingNumber == shipment.trackingNumber;
+        return trackingNumber.equals(shipment.trackingNumber);
     }
 
     @Override
