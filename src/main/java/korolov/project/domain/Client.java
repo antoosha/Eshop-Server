@@ -1,16 +1,28 @@
 package korolov.project.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity(name = "client_table")
 public class Client {
+
+    @Id
+    @Column(name = "client_id")
+    private String email;
     private String name;
     private String surname;
-    private String email; // primary key in db
 
     public Client(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+    }
+
+    public Client() {
+
     }
 
     public String getName() {

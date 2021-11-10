@@ -2,6 +2,7 @@ package korolov.project.business;
 
 import korolov.project.domain.Client;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class ClientService extends AbstractCrudService<String, Client> {
 
     //TODO business logic

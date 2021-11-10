@@ -1,18 +1,33 @@
 package korolov.project.domain;
 
-
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@Entity(name = "order_table")
 public class Order {
-    private Long orderId; //it is database id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
     private String clientEmail;
+
+    //owning side
+    @ManyToMany
+    @JoinTable(
+            name = "order_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
     private Collection<Product> products;
 
     public Order(Long orderId, String clientEmail, Collection<Product> products) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
         this.products = products;
+    }
+
+    public Order() {
+
     }
 
     public Long getOrderId() {

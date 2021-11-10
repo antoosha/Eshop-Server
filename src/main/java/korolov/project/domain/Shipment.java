@@ -1,16 +1,30 @@
 package korolov.project.domain;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity(name = "shipment_table")
 public class Shipment {
+    @Id
+    //well to do GenerationType.SEQUENCE
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "shipment_id")
+    private Long trackingNumber;
+
+    @OneToOne
+    @JoinColumn(name = "order_id")
     private Order order;
+
     private String clientAddress;
-    private Long trackingNumber; // primary key in db
 
     public Shipment(Order order, String clientAddress, Long trackingNumber) {
         this.order = order;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
+    }
+
+    public Shipment() {
+
     }
 
     public Order getOrder() {
