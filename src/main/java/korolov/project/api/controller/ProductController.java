@@ -26,7 +26,7 @@ public class ProductController {
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product already exists");
         }
-        return getOne(productDTO.getProductId());
+        return productDTO;//returning id is not correct, in database is another ID,TODO
     }
 
     //READ showAllProducts GET
@@ -53,7 +53,7 @@ public class ProductController {
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
-        return getOne(productDTO.getProductId());
+        return productDTO;//returning id is not correct, in database is another ID,TODO
     }
 
     //DELETE deleteProduct hideProduct/*if we dont want to delete but want to hide from all clients*/ DELETE

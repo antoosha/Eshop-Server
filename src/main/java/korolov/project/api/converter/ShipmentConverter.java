@@ -3,7 +3,7 @@ package korolov.project.api.converter;
 import korolov.project.api.dto.ShipmentDTO;
 import korolov.project.domain.Shipment;
 
-import java.util.Collection;
+import java.util.List;
 
 public class ShipmentConverter {
     public static Shipment toModel(ShipmentDTO shipmentDTO) {
@@ -14,11 +14,11 @@ public class ShipmentConverter {
         return new ShipmentDTO(shipment.getOrder(), shipment.getClientAddress(), shipment.getTrackingNumber());
     }
 
-    public static Collection<Shipment> toModels(Collection<ShipmentDTO> shipmentDTOs) {
+    public static List<Shipment> toModels(List<ShipmentDTO> shipmentDTOs) {
         return shipmentDTOs.stream().map(ShipmentConverter::toModel).toList();
     }
 
-    public static Collection<ShipmentDTO> fromModels(Collection<Shipment> shipments) {
+    public static List<ShipmentDTO> fromModels(List<Shipment> shipments) {
         return shipments.stream().map(ShipmentConverter::fromModel).toList();
     }
 }

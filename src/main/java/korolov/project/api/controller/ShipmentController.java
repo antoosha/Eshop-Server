@@ -26,7 +26,7 @@ public class ShipmentController {
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment already exists");
         }
-        return getOne(shipmentDTO.getTrackingNumber());
+        return shipmentDTO;//returning id is not correct, in database is another ID,TODO
     }
 
     //READ showShipment showAllShipments GET
@@ -53,7 +53,7 @@ public class ShipmentController {
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shipment not found");
         }
-        return getOne(shipmentDTO.getTrackingNumber());
+        return shipmentDTO; //returning id is not correct, in database is another ID,TODO
     }
 
     //DELETE deleteShipment /*if client get his/her order*/ DELETE

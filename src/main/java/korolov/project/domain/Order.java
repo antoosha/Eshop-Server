@@ -1,7 +1,9 @@
 package korolov.project.domain;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "order_table")
@@ -18,12 +20,12 @@ public class Order {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id")
     )
-    private Collection<Product> products;
+    private List<Product> products  = new ArrayList<>();
 
-    public Order(Long orderId, String clientEmail, Collection<Product> products) {
+    public Order(Long orderId, String clientEmail, List<Product> products) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
-        this.products = products;
+        this.products.addAll(products);
     }
 
     public Order() {
@@ -46,12 +48,12 @@ public class Order {
         this.clientEmail = clientEmail;
     }
 
-    public Collection<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
+    public void setProducts(List<Product> products) {
+        this.products.addAll(products);
     }
 
     @Override

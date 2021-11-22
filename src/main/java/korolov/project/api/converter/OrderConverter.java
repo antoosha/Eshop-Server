@@ -3,7 +3,7 @@ package korolov.project.api.converter;
 import korolov.project.api.dto.OrderDTO;
 import korolov.project.domain.Order;
 
-import java.util.Collection;
+import java.util.List;
 
 public class OrderConverter {
     public static Order toModel(OrderDTO orderDTO) {
@@ -14,11 +14,11 @@ public class OrderConverter {
         return new OrderDTO(order.getOrderId(), order.getClientEmail(), order.getProducts());
     }
 
-    public static Collection<Order> toModels(Collection<OrderDTO> orderDTOs) {
+    public static List<Order> toModels(List<OrderDTO> orderDTOs) {
         return orderDTOs.stream().map(OrderConverter::toModel).toList();
     }
 
-    public static Collection<OrderDTO> fromModels(Collection<Order> orders) {
+    public static List<OrderDTO> fromModels(List<Order> orders) {
         return orders.stream().map(OrderConverter::fromModel).toList();
     }
 }

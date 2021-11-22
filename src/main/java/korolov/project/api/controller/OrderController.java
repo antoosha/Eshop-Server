@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class OrderController {
@@ -27,12 +27,12 @@ public class OrderController {
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already exists");
         }
-        return getOne(orderDTO.getOrderId());
+        return orderDTO;//returning id is not correct, in database is another ID,TODO
     }
 
     //READ showAllOrders GET
     @GetMapping("/orders")
-    Collection<OrderDTO> getAll() {
+    List<OrderDTO> getAll() {
         return OrderConverter.fromModels(orderService.readAll());
     }
 
@@ -54,7 +54,7 @@ public class OrderController {
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
         }
-        return getOne(orderDTO.getOrderId());
+        return orderDTO;//returning id is not correct, in database is another ID,TODO
     }
 
     //DELETE deleteOrder /*canceled*/ DELETE
