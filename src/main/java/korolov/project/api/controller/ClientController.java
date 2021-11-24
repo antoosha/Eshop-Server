@@ -23,11 +23,11 @@ public class ClientController {
     @PostMapping("/clients")
     ClientDTO create(@RequestBody ClientDTO clientDTO) {
         try {
-            clientService.create(ClientConverter.toModel(clientDTO));
+            clientDTO = ClientConverter.fromModel(clientService.create(ClientConverter.toModel(clientDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client already exists");
         }
-        return getOne(clientDTO.getEmail());
+        return clientDTO;
     }
 
     //READ showAllClients GET
@@ -50,11 +50,11 @@ public class ClientController {
         if (!clientDTO.getEmail().equals(id))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client ids do not match");
         try {
-            clientService.update(ClientConverter.toModel(clientDTO));
+            clientDTO = ClientConverter.fromModel(clientService.update(ClientConverter.toModel(clientDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
         }
-        return getOne(clientDTO.getEmail());
+        return clientDTO;
     }
 
     //DELETE deleteClient DELETE

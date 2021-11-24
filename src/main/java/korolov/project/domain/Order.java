@@ -14,7 +14,7 @@ public class Order {
     private String clientEmail;
 
     //owning side
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "order_product",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -23,7 +23,8 @@ public class Order {
     private List<Product> products  = new ArrayList<>();
 
     public Order(Long orderId, String clientEmail, List<Product> products) {
-        this.orderId = orderId;
+        if(orderId == null) this.orderId = 0L;
+        else this.orderId = orderId;
         this.clientEmail = clientEmail;
         this.products.addAll(products);
     }

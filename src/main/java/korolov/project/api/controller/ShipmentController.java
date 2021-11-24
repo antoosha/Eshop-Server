@@ -1,5 +1,6 @@
 package korolov.project.api.controller;
 
+
 import korolov.project.api.converter.ShipmentConverter;
 import korolov.project.api.dto.ShipmentDTO;
 import korolov.project.business.EntityStateException;
@@ -22,11 +23,11 @@ public class ShipmentController {
     @PostMapping("/shipments")
     ShipmentDTO create(@RequestBody ShipmentDTO shipmentDTO) {
         try {
-            shipmentService.create(ShipmentConverter.toModel(shipmentDTO));
+            shipmentDTO = ShipmentConverter.fromModel(shipmentService.create(ShipmentConverter.toModel(shipmentDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment already exists");
         }
-        return shipmentDTO;//returning id is not correct, in database is another ID,TODO
+        return shipmentDTO;
     }
 
     //READ showShipment showAllShipments GET
@@ -49,11 +50,11 @@ public class ShipmentController {
         if (shipmentDTO.getTrackingNumber() != id)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment ids do not match");
         try {
-            shipmentService.update(ShipmentConverter.toModel(shipmentDTO));
+            shipmentDTO = ShipmentConverter.fromModel(shipmentService.update(ShipmentConverter.toModel(shipmentDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shipment not found");
         }
-        return shipmentDTO; //returning id is not correct, in database is another ID,TODO
+        return shipmentDTO;
     }
 
     //DELETE deleteShipment /*if client get his/her order*/ DELETE

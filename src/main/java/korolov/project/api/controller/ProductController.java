@@ -1,5 +1,6 @@
 package korolov.project.api.controller;
 
+import korolov.project.api.converter.OrderConverter;
 import korolov.project.api.converter.ProductConverter;
 import korolov.project.api.dto.ProductDTO;
 import korolov.project.business.EntityStateException;
@@ -22,11 +23,11 @@ public class ProductController {
     @PostMapping("/products")
     ProductDTO create(@RequestBody ProductDTO productDTO) {
         try {
-            productService.create(ProductConverter.toModel(productDTO));
+            productDTO = ProductConverter.fromModel(productService.create(ProductConverter.toModel(productDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product already exists");
         }
-        return productDTO;//returning id is not correct, in database is another ID,TODO
+        return productDTO;
     }
 
     //READ showAllProducts GET
@@ -49,11 +50,11 @@ public class ProductController {
         if (productDTO.getProductId() != id)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product ids do not match");
         try {
-            productService.update(ProductConverter.toModel(productDTO));
+            productDTO = ProductConverter.fromModel(productService.update(ProductConverter.toModel(productDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
         }
-        return productDTO;//returning id is not correct, in database is another ID,TODO
+        return productDTO;
     }
 
     //DELETE deleteProduct hideProduct/*if we dont want to delete but want to hide from all clients*/ DELETE

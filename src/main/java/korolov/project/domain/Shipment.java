@@ -20,7 +20,8 @@ public class Shipment {
     public Shipment(Order order, String clientAddress, Long trackingNumber) {
         this.order = order;
         this.clientAddress = clientAddress;
-        this.trackingNumber = trackingNumber;
+        if(trackingNumber == null) this.trackingNumber = 0L;
+        else this.trackingNumber = trackingNumber;
     }
 
     public Shipment() {

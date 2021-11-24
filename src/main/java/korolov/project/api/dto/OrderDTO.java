@@ -17,6 +17,12 @@ public class OrderDTO {
         this.products.addAll(products);
     }
 
+    public OrderDTO(String clientEmail, List<Product> products) {
+        this.orderId = 0L;
+        this.clientEmail = clientEmail;
+        this.products.addAll(products);
+    }
+
     public OrderDTO() {
     }
 

@@ -23,11 +23,11 @@ public class OrderController {
     @PostMapping("/orders")
     OrderDTO create(@RequestBody OrderDTO orderDTO) {
         try {
-            orderService.create(OrderConverter.toModel(orderDTO));
+            orderDTO = OrderConverter.fromModel(orderService.create(OrderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already exists");
         }
-        return orderDTO;//returning id is not correct, in database is another ID,TODO
+        return orderDTO;
     }
 
     //READ showAllOrders GET
@@ -50,11 +50,11 @@ public class OrderController {
         if (id != orderDTO.getOrderId())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ids do not match");
         try {
-            orderService.update(OrderConverter.toModel(orderDTO));
+            orderDTO = OrderConverter.fromModel(orderService.update(OrderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
         }
-        return orderDTO;//returning id is not correct, in database is another ID,TODO
+        return orderDTO;
     }
 
     //DELETE deleteOrder /*canceled*/ DELETE

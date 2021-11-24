@@ -27,10 +27,10 @@ public abstract class AbstractCrudService<K, E> {
      * @param entity entity to be stored
      * @throws EntityStateException if an entity with the same key is already stored
      */
-    public void create(E entity) throws EntityStateException {
+    public E create(E entity) throws EntityStateException {
         if (exists(entity))
             throw new EntityStateException(entity);
-        repository.save(entity); //delegate call to data layer
+        return repository.save(entity); //delegate call to data layer
     }
 
     public abstract boolean exists(E entity);
@@ -49,9 +49,9 @@ public abstract class AbstractCrudService<K, E> {
      * @param entity the new state of the entity to be updated; the instance must contain a key value
      * @throws EntityStateException if the entity cannot be found
      */
-    public void update(E entity) throws EntityStateException {
+    public E update(E entity) throws EntityStateException {
         if (exists(entity))
-            repository.save(entity);
+            return repository.save(entity);
         else
             throw new EntityStateException(entity);
     }

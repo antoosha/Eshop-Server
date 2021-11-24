@@ -13,6 +13,12 @@ public class ShipmentDTO {
         this.trackingNumber = trackingNumber;
     }
 
+    public ShipmentDTO(Order order, String clientAddress) {
+        this.order = order;
+        this.clientAddress = clientAddress;
+        this.trackingNumber = 0L;
+    }
+
     public ShipmentDTO() {
     }
 

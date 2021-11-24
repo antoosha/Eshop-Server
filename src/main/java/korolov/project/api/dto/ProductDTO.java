@@ -11,6 +11,12 @@ public class ProductDTO {
         this.productId = productId;
     }
 
+    public ProductDTO(String productName, double price) {
+        this.productName = productName;
+        this.price = price;
+        this.productId = 0L;
+    }
+
     public ProductDTO() {
     }
 
