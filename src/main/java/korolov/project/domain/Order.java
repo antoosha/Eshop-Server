@@ -23,8 +23,7 @@ public class Order {
     private List<Product> products  = new ArrayList<>();
 
     public Order(Long orderId, String clientEmail, List<Product> products) {
-        if(orderId == null) this.orderId = 0L;
-        else this.orderId = orderId;
+        if(orderId != null) this.orderId = orderId;
         this.clientEmail = clientEmail;
         this.products.addAll(products);
     }

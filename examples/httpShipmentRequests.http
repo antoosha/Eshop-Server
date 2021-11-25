@@ -12,8 +12,13 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "order": {"orderId": 0, "clientEmail":  "emailExample@gmail.com", "products": []},
-  "clientAddress": "Thakurova 9" ,
+  "orderDTO":
+  {
+    "orderId": 3,
+    "clientEmail":  "emailExample@gmail.com",
+    "productDTOs": []
+  },
+  "clientAddress": "Thakurova 9",
   "trackingNumber": 0
 }
 
@@ -23,8 +28,13 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "order": {"orderId": 0, "clientEmail":  "emailExample@gmail.com", "products": []},
-  "clientAddress": "Thakurova 9" ,
+  "orderDTO":
+  {
+    "orderId": 3,
+    "clientEmail":  "emailExample@gmail.com",
+    "productDTOs": []
+  },
+  "clientAddress": "Thakurova 9",
   "trackingNumber": 0
 }
 

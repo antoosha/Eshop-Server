@@ -17,11 +17,12 @@ Content-Type: application/json
 }
 
 ### Update a product with id 0
-PUT http://localhost:8080/products/0
+PUT http://localhost:8080/products/1
 Accept: application/json
 Content-Type: application/json
 
 {
+  "productId": 1,
   "productName": "Banana",
   "price": 9.99
 }

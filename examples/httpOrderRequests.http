@@ -12,20 +12,19 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "orderId": 0,
   "clientEmail": "emailExample@gmail.com",
-  "products":[]
+  "productDTOs": []
 }
 
 ### Update an order with id 0
-PUT http://localhost:8080/orders/0
+PUT http://localhost:8080/orders/1
 Accept: application/json
 Content-Type: application/json
 
 {
-  "orderId": 0,
+  "orderId": 1,
   "clientEmail": "emailExample@gmail.com",
-  "products":[]
+  "productDTOs": []
 }
 
 ### Delete an order with id 0

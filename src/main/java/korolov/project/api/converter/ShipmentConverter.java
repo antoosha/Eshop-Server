@@ -7,11 +7,13 @@ import java.util.List;
 
 public class ShipmentConverter {
     public static Shipment toModel(ShipmentDTO shipmentDTO) {
-        return new Shipment(shipmentDTO.getOrder(), shipmentDTO.getClientAddress(), shipmentDTO.getTrackingNumber());
+        return new Shipment(OrderConverter.toModel(shipmentDTO.getOrder()),
+                shipmentDTO.getClientAddress(), shipmentDTO.getTrackingNumber());
     }
 
     public static ShipmentDTO fromModel(Shipment shipment) {
-        return new ShipmentDTO(shipment.getOrder(), shipment.getClientAddress(), shipment.getTrackingNumber());
+        return new ShipmentDTO(OrderConverter.fromModel(shipment.getOrder()),
+                shipment.getClientAddress(), shipment.getTrackingNumber());
     }
 
     public static List<Shipment> toModels(List<ShipmentDTO> shipmentDTOs) {
