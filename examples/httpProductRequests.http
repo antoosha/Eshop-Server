@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Delete a product with id 0
-DELETE http://localhost:8080/products/0
+DELETE http://localhost:8080/products/1
 Accept: application/json
 
 

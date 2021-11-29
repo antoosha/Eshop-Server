@@ -52,7 +52,7 @@ public class ProductController {
         try {
             productDTO = ProductConverter.fromModel(productService.update(ProductConverter.toModel(productDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product not found");
         }
         return productDTO;
     }
@@ -61,7 +61,7 @@ public class ProductController {
     @DeleteMapping("/products/{id}")
     void delete(@PathVariable long id) {
         if (productService.readById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product to delete not found");
         }
         productService.deleteById(id);
     }

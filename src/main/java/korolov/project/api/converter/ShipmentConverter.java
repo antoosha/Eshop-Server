@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ShipmentConverter {
     public static Shipment toModel(ShipmentDTO shipmentDTO) {
-        return new Shipment(OrderConverter.toModel(shipmentDTO.getOrder()),
+        return new Shipment(OrderConverter.toModel(shipmentDTO.getOrderDTO()),
                 shipmentDTO.getClientAddress(), shipmentDTO.getTrackingNumber());
     }
 

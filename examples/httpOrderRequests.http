@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Delete an order with id 0
-DELETE http://localhost:8080/orders/0
+DELETE http://localhost:8080/orders/3
 Accept: application/json
 
 

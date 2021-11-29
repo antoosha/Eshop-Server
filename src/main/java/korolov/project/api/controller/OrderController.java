@@ -52,7 +52,7 @@ public class OrderController {
         try {
             orderDTO = OrderConverter.fromModel(orderService.update(OrderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found");
         }
         return orderDTO;
     }
@@ -61,7 +61,7 @@ public class OrderController {
     @DeleteMapping("/orders/{id}")
     void delete(@PathVariable long id) {
         if (orderService.readById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order to delete not found");
         }
         orderService.deleteById(id);
     }

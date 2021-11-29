@@ -9,7 +9,7 @@ public class OrderConverter {
     public static Order toModel(OrderDTO orderDTO) {
         return new Order(orderDTO.getOrderId(),
                          orderDTO.getClientEmail(),
-                         ProductConverter.toModels(orderDTO.getProducts()));
+                         ProductConverter.toModels(orderDTO.getProductDTOs()));
     }
 
     public static OrderDTO fromModel(Order order) {

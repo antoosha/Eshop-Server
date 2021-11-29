@@ -1,7 +1,5 @@
 package korolov.project.api.dto;
 
-import korolov.project.domain.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class OrderDTO {
         this.productDTOs.addAll(productDTOs);
     }
 
-    public OrderDTO() {
+    public OrderDTO(){
     }
 
     public Long getOrderId() {
@@ -40,11 +38,11 @@ public class OrderDTO {
         this.clientEmail = clientEmail;
     }
 
-    public List<ProductDTO> getProducts() {
+    public List<ProductDTO> getProductDTOs() {
         return productDTOs;
     }
 
-    public void setProducts(List<ProductDTO> productDTOs) {
-        this.productDTOs.addAll(productDTOs);
+    public void setProductDTOs(List<ProductDTO> productDTOs) {
+        this.productDTOs = productDTOs;
     }
 }

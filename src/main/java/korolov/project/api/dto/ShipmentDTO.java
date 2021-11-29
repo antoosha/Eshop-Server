@@ -19,11 +19,11 @@ public class ShipmentDTO {
     public ShipmentDTO() {
     }
 
-    public OrderDTO getOrder() {
+    public OrderDTO getOrderDTO() {
         return orderDTO;
     }
 
-    public void setOrder(OrderDTO orderDTO) {
+    public void setOrderDTO(OrderDTO orderDTO) {
         this.orderDTO = orderDTO;
     }
 

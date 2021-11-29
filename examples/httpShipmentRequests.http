@@ -14,12 +14,11 @@ Content-Type: application/json
 {
   "orderDTO":
   {
-    "orderId": 3,
+    "orderId": 1,
     "clientEmail":  "emailExample@gmail.com",
     "productDTOs": []
   },
-  "clientAddress": "Thakurova 9",
-  "trackingNumber": 0
+  "clientAddress": "Thakurova 9"
 }
 
 ### Update a shipment with track number 0

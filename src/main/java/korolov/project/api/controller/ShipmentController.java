@@ -52,7 +52,7 @@ public class ShipmentController {
         try {
             shipmentDTO = ShipmentConverter.fromModel(shipmentService.update(ShipmentConverter.toModel(shipmentDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shipment not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment not found");
         }
         return shipmentDTO;
     }
@@ -61,7 +61,7 @@ public class ShipmentController {
     @DeleteMapping("/shipments/{id}")
     void delete(@PathVariable long id) {
         if (shipmentService.readById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shipment not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment to delete not found");
         }
         shipmentService.deleteById(id);
     }

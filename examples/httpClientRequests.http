@@ -14,7 +14,7 @@ Content-Type: application/json
 {
   "name": "Anton",
   "surname": "Korolov",
-  "email":"emailExample@gmail.com"
+  "email":"emailExample2@gmail.com"
 }
 
 ### Update a client with email emailExample@gmail.com

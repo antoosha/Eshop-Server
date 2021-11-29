@@ -52,7 +52,7 @@ public class ClientController {
         try {
             clientDTO = ClientConverter.fromModel(clientService.update(ClientConverter.toModel(clientDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client not found");
         }
         return clientDTO;
     }
@@ -61,7 +61,7 @@ public class ClientController {
     @DeleteMapping("/clients/{id}")
     void delete(@PathVariable String id) {
         if (clientService.readById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client to delete not found");
         }
         clientService.deleteById(id);
     }
