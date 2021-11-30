@@ -8,12 +8,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClientService extends AbstractCrudService<String, Client> {
 
-    //TODO business logic
-
     public ClientService(ClientJpaRepository clientJpaRepository) {
         super(clientJpaRepository);
     }
 
+    /**
+     * Save entity in database if all parameters in entity are valid else throws exception
+     *
+     * @param entity entity to be stored
+     * @return saved entity
+     * @throws EntityStateException
+     */
     @Override
     public Client create(Client entity) throws EntityStateException {
         if(!checkIfValid(entity)) {
@@ -24,6 +29,14 @@ public class ClientService extends AbstractCrudService<String, Client> {
     }
 
 
+    /**
+     * Update entity in database if all parameters in entity are valid else throws exception
+     * e-mail could not be changed
+     *
+     * @param entity the new state of the entity to be updated; the instance must contain a key value
+     * @return updated entity
+     * @throws EntityStateException
+     */
     @Override
     public Client update(Client entity) throws EntityStateException {
         if(!exists(entity) || !checkIfValid(entity) ){
@@ -37,16 +50,19 @@ public class ClientService extends AbstractCrudService<String, Client> {
         return repository.existsById(entity.getEmail());
     }
 
+
     /**
      * Method to check if all parameters in entity is valid.
+     *
      * @param entity to save or update in database
      * @return true if valid, else false
      */
     private boolean checkIfValid(Client entity){
-        if(entity.getEmail().isEmpty() || entity.getName().isEmpty() || entity.getSurname().isEmpty() ||
-           entity.getEmail().isBlank() || entity.getName().isBlank() || entity.getSurname().isBlank() ||
-           !entity.getEmail().contains("@") || entity.getName().matches(".*\\d.*") ||
-           entity.getSurname().matches(".*\\d.*")) {
+        if(entity.getEmail().isEmpty() || entity.getName().isEmpty() || entity.getSurname().isEmpty()
+                || entity.getEmail().isBlank() || entity.getName().isBlank() || entity.getSurname().isBlank()
+                || entity.getName().matches(".*\\d.*") || entity.getSurname().matches(".*\\d.*")
+                || !entity.getEmail().contains("@") )
+        {
             return false;
         }
         return true;

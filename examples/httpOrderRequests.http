@@ -13,7 +13,14 @@ Content-Type: application/json
 
 {
   "clientEmail": "emailExample@gmail.com",
-  "productDTOs": []
+  "productDTOs":
+  [
+    {
+      "productName": "Banana",
+      "price": 0.99,
+      "productId": 1
+    }
+  ]
 }
 
 ### Update an order with id 0
@@ -28,7 +35,7 @@ Content-Type: application/json
 }
 
 ### Delete an order with id 0
-DELETE http://localhost:8080/orders/3
+DELETE http://localhost:8080/orders/5
 Accept: application/json
 
 

@@ -22,23 +22,23 @@ Content-Type: application/json
 }
 
 ### Update a shipment with track number 0
-PUT http://localhost:8080/shipments/0
+PUT http://localhost:8080/shipments/1
 Accept: application/json
 Content-Type: application/json
 
 {
   "orderDTO":
   {
-    "orderId": 3,
+    "orderId": 1,
     "clientEmail":  "emailExample@gmail.com",
     "productDTOs": []
   },
   "clientAddress": "Thakurova 9",
-  "trackingNumber": 0
+  "trackingNumber": 1
 }
 
 ### Delete a shipment with track number 0
-DELETE http://localhost:8080/shipments/0
+DELETE http://localhost:8080/shipments/1
 Accept: application/json
 
 
