@@ -1,9 +1,9 @@
 package korolov.project.business;
 
+import korolov.project.api.Exceptions.EntityStateException;
 import korolov.project.dao.ClientJpaRepository;
 import korolov.project.dao.OrderJpaRepository;
 import korolov.project.dao.ProductJpaRepository;
-import korolov.project.domain.Client;
 import korolov.project.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

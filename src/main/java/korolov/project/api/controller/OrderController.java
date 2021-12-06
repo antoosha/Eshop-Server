@@ -2,7 +2,7 @@ package korolov.project.api.controller;
 
 import korolov.project.api.converter.OrderConverter;
 import korolov.project.api.dto.OrderDTO;
-import korolov.project.business.EntityStateException;
+import korolov.project.api.Exceptions.EntityStateException;
 import korolov.project.business.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +14,20 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final OrderConverter orderConverter;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, OrderConverter orderConverter) {
         this.orderService = orderService;
+        this.orderConverter = orderConverter;
     }
 
     //CREATE createOrder POST
     @PostMapping("/orders")
     OrderDTO create(@RequestBody OrderDTO orderDTO) {
         try {
-            orderDTO = OrderConverter.fromModel(orderService.create(OrderConverter.toModel(orderDTO)));
+            orderDTO = orderConverter.fromModel(orderService.create(orderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already exists or any product does not exist.");
         }
         return orderDTO;
     }
@@ -33,13 +35,13 @@ public class OrderController {
     //READ showAllOrders GET
     @GetMapping("/orders")
     List<OrderDTO> getAll() {
-        return OrderConverter.fromModels(orderService.readAll());
+        return orderConverter.fromModels(orderService.readAll());
     }
 
     //READ showOrder GET
     @GetMapping("/orders/{id}")
     OrderDTO getOne(@PathVariable long id) {
-        return OrderConverter.fromModel(orderService.readById(id).orElseThrow(
+        return orderConverter.fromModel(orderService.readById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found")
         ));
     }
@@ -50,7 +52,7 @@ public class OrderController {
         if (id != orderDTO.getOrderId())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order ids do not match");
         try {
-            orderDTO = OrderConverter.fromModel(orderService.update(OrderConverter.toModel(orderDTO)));
+            orderDTO = orderConverter.fromModel(orderService.update(orderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found");
         }

@@ -6,17 +6,17 @@ import java.util.List;
 public class OrderDTO {
     public Long orderId = 0L; //it is database id
     public String clientEmail;
-    public List<ProductDTO> productDTOs = new ArrayList<>();
+    public List<Long> productIdsDTOs = new ArrayList<>();
 
-    public OrderDTO(Long orderId, String clientEmail, List<ProductDTO> productDTOs) {
+    public OrderDTO(Long orderId, String clientEmail, List<Long> productIdsDTOs) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
-        this.productDTOs.addAll(productDTOs);
+        this.productIdsDTOs.addAll(productIdsDTOs);
     }
 
-    public OrderDTO(String clientEmail, List<ProductDTO> productDTOs) {
+    public OrderDTO(String clientEmail, List<Long> productIdsDTOs) {
         this.clientEmail = clientEmail;
-        this.productDTOs.addAll(productDTOs);
+        this.productIdsDTOs.addAll(productIdsDTOs);
     }
 
     public OrderDTO(){
@@ -38,11 +38,11 @@ public class OrderDTO {
         this.clientEmail = clientEmail;
     }
 
-    public List<ProductDTO> getProductDTOs() {
-        return productDTOs;
+    public List<Long> getProductIdsDTOs() {
+        return productIdsDTOs;
     }
 
-    public void setProductDTOs(List<ProductDTO> productDTOs) {
-        this.productDTOs = productDTOs;
+    public void setProductIdsDTOs(List<Long> productIdsDTOs) {
+        this.productIdsDTOs = productIdsDTOs;
     }
 }

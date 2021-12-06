@@ -12,12 +12,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "orderDTO":
-  {
-    "orderId": 1,
-    "clientEmail":  "emailExample@gmail.com",
-    "productDTOs": []
-  },
+  "orderIdDTO": 1,
   "clientAddress": "Thakurova 9"
 }
 
@@ -27,12 +22,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "orderDTO":
-  {
-    "orderId": 1,
-    "clientEmail":  "emailExample@gmail.com",
-    "productDTOs": []
-  },
+  "orderIdDTO": 1,
   "clientAddress": "Thakurova 9",
   "trackingNumber": 1
 }

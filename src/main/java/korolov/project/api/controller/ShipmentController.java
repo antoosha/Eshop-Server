@@ -3,7 +3,7 @@ package korolov.project.api.controller;
 
 import korolov.project.api.converter.ShipmentConverter;
 import korolov.project.api.dto.ShipmentDTO;
-import korolov.project.business.EntityStateException;
+import korolov.project.api.Exceptions.EntityStateException;
 import korolov.project.business.ShipmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +14,20 @@ import java.util.Collection;
 @RestController
 public class ShipmentController {
     private final ShipmentService shipmentService;
+    private final ShipmentConverter shipmentConverter;
 
-    public ShipmentController(ShipmentService shipmentService) {
+    public ShipmentController(ShipmentService shipmentService, ShipmentConverter shipmentConverter) {
         this.shipmentService = shipmentService;
+        this.shipmentConverter = shipmentConverter;
     }
 
     //CREATE addShipment /* if order is on way*/ POST
     @PostMapping("/shipments")
     ShipmentDTO create(@RequestBody ShipmentDTO shipmentDTO) {
         try {
-            shipmentDTO = ShipmentConverter.fromModel(shipmentService.create(ShipmentConverter.toModel(shipmentDTO)));
+            shipmentDTO = shipmentConverter.fromModel(shipmentService.create(shipmentConverter.toModel(shipmentDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment already exists or order does not exist.");
         }
         return shipmentDTO;
     }
@@ -33,13 +35,13 @@ public class ShipmentController {
     //READ showShipment showAllShipments GET
     @GetMapping("/shipments")
     Collection<ShipmentDTO> getAll() {
-        return ShipmentConverter.fromModels(shipmentService.readAll());
+        return shipmentConverter.fromModels(shipmentService.readAll());
     }
 
     //READ showShipment GET
     @GetMapping("/shipments/{id}")
     ShipmentDTO getOne(@PathVariable long id) {
-        return ShipmentConverter.fromModel(shipmentService.readById(id).orElseThrow(
+        return shipmentConverter.fromModel(shipmentService.readById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shipment not found")
         ));
     }
@@ -50,7 +52,7 @@ public class ShipmentController {
         if (shipmentDTO.getTrackingNumber() != id)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment ids do not match");
         try {
-            shipmentDTO = ShipmentConverter.fromModel(shipmentService.update(ShipmentConverter.toModel(shipmentDTO)));
+            shipmentDTO = shipmentConverter.fromModel(shipmentService.update(shipmentConverter.toModel(shipmentDTO)));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment not found");
         }
