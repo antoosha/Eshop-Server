@@ -1,6 +1,6 @@
 package korolov.project.business;
 
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.dao.ClientJpaRepository;
 import korolov.project.dao.OrderJpaRepository;
 import korolov.project.dao.ProductJpaRepository;

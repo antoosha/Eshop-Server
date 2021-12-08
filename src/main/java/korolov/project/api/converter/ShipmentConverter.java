@@ -1,7 +1,7 @@
 package korolov.project.api.converter;
 
 import korolov.project.api.dto.ShipmentDTO;
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.business.OrderService;
 import korolov.project.domain.Shipment;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package korolov.project.api.controller;
 
 import korolov.project.api.converter.OrderConverter;
 import korolov.project.api.dto.OrderDTO;
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.business.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

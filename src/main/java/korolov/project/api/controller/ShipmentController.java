@@ -3,7 +3,7 @@ package korolov.project.api.controller;
 
 import korolov.project.api.converter.ShipmentConverter;
 import korolov.project.api.dto.ShipmentDTO;
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.business.ShipmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

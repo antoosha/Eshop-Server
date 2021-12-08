@@ -1,4 +1,4 @@
-package korolov.project.api.Exceptions;
+package korolov.project.api.exceptions;
 
 /**
  * A checked exception indicating problem related to existence of an entity.

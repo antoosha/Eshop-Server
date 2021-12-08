@@ -1,6 +1,6 @@
 package korolov.project.business;
 
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.dao.ProductJpaRepository;
 import korolov.project.domain.Product;
 import org.springframework.stereotype.Component;

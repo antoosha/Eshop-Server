@@ -3,7 +3,7 @@ package korolov.project.api.controller;
 import korolov.project.api.converter.ClientConverter;
 import korolov.project.api.dto.ClientDTO;
 import korolov.project.business.ClientService;
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;

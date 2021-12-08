@@ -1,6 +1,6 @@
 package korolov.project.business;
 
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package korolov.project.business;
 
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.dao.ShipmentJpaRepository;
 import korolov.project.domain.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;

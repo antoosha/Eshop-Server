@@ -1,7 +1,7 @@
 package korolov.project.api.converter;
 
 import korolov.project.api.dto.OrderDTO;
-import korolov.project.api.Exceptions.EntityStateException;
+import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.business.ProductService;
 import korolov.project.domain.Order;
 import korolov.project.domain.Product;

@@ -1,4 +1,4 @@
-package korolov.project.api.Exceptions;
+package korolov.project.api.exceptions;
 
 /**
  * An unchecked (runtime) exception indicating illegal operation (authorization denied).
