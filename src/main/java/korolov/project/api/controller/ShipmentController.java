@@ -2,6 +2,7 @@ package korolov.project.api.controller;
 
 
 import korolov.project.api.converter.ShipmentConverter;
+import korolov.project.api.dto.OrderDTO;
 import korolov.project.api.dto.ShipmentDTO;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.api.exceptions.HasRelationException;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class ShipmentController {
@@ -37,6 +39,16 @@ public class ShipmentController {
     @GetMapping("/shipments")
     Collection<ShipmentDTO> getAll() {
         return shipmentConverter.fromModels(shipmentService.readAll());
+    }
+
+    //READ
+    @GetMapping("/shipments/client/{email}")
+    List<ShipmentDTO> getByEmail(@PathVariable String email) {
+        try{
+            return shipmentConverter.fromModels(shipmentService.findAllByClientEmail(email));
+        } catch (EntityStateException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is not valid");
+        }
     }
 
     //READ showShipment GET

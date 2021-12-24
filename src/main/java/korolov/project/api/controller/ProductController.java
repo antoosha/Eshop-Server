@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 public class ProductController {
@@ -42,6 +43,17 @@ public class ProductController {
         return ProductConverter.fromModel(productService.readById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found")
         ));
+    }
+
+    //READ showProduct GET
+    @GetMapping("/products/price/less/{price}")
+    Collection<ProductDTO> getAllWithPrice(@PathVariable double price) {
+        try {
+            return ProductConverter.fromModels(productService.findAllWithPriceLessThan(price));
+        }
+        catch (EntityStateException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price less than 0");
+        }
     }
 
     //UPDATE editProduct PUT

@@ -47,6 +47,22 @@ public class OrderController {
         ));
     }
 
+    //READ
+    @GetMapping("/orders/client/{email}")
+    List<OrderDTO> getByEmail(@PathVariable String email) {
+        try{
+             return orderConverter.fromModels(orderService.findAllByClientEmail(email));
+        } catch (EntityStateException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is not valid");
+        }
+    }
+
+    //READ
+    @GetMapping("/orders/product/{id}")
+    List<OrderDTO> getByProductId(@PathVariable long id) {
+        return orderConverter.fromModels(orderService.findAllContainsProduct(id));
+    }
+
     //UPDATE editOrder /*change smth in order*/ PUT
     @PutMapping("/orders/{id}")
     OrderDTO update(@PathVariable long id, @RequestBody OrderDTO orderDTO) {
