@@ -3,6 +3,7 @@ package korolov.project.api.controller;
 import korolov.project.api.converter.OrderConverter;
 import korolov.project.api.dto.OrderDTO;
 import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.api.exceptions.HasRelationException;
 import korolov.project.business.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +66,10 @@ public class OrderController {
         if (orderService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order to delete not found");
         }
-        orderService.deleteById(id);
+        try {
+            orderService.deleteById(id);
+        } catch (HasRelationException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Order has shipment. Could not to delete order");
+        }
     }
 }

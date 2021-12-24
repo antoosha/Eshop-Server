@@ -19,7 +19,7 @@ public class OrderDTO {
         this.productIdsDTOs.addAll(productIdsDTOs);
     }
 
-    public OrderDTO(){
+    public OrderDTO() {
     }
 
     public Long getOrderId() {

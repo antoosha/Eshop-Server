@@ -1,16 +1,25 @@
 package korolov.project.business;
 
 import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.api.exceptions.HasRelationException;
+import korolov.project.dao.OrderJpaRepository;
 import korolov.project.dao.ProductJpaRepository;
+import korolov.project.domain.Order;
 import korolov.project.domain.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
 @Transactional
 public class ProductService extends AbstractCrudService<Long, Product> {
 
     //TODO cool business logic to not delete but hide the product
+
+    @Autowired
+    private OrderJpaRepository orderJpaRepository;
 
     public ProductService(ProductJpaRepository productJpaRepository) {
         super(productJpaRepository);
@@ -25,7 +34,7 @@ public class ProductService extends AbstractCrudService<Long, Product> {
      */
     @Override
     public Product create(Product entity) throws EntityStateException {
-        if(entity.getPrice() < 0 || entity.getProductName().isEmpty() || entity.getProductName().isBlank()){
+        if (entity.getPrice() < 0 || entity.getProductName().isEmpty() || entity.getProductName().isBlank()) {
             throw new EntityStateException();
         }
         return super.create(entity);
@@ -40,7 +49,7 @@ public class ProductService extends AbstractCrudService<Long, Product> {
      */
     @Override
     public Product update(Product entity) throws EntityStateException {
-        if(!exists(entity) || entity.getPrice() < 0 || entity.getProductName().isEmpty() || entity.getProductName().isBlank()){
+        if (!exists(entity) || entity.getPrice() < 0 || entity.getProductName().isEmpty() || entity.getProductName().isBlank()) {
             throw new EntityStateException();
         }
         return super.update(entity);
@@ -49,5 +58,16 @@ public class ProductService extends AbstractCrudService<Long, Product> {
     @Override
     public boolean exists(Product entity) {
         return repository.existsById(entity.getProductId());
+    }
+
+    @Override
+    public void deleteById(Long id) throws HasRelationException {
+        List<Order> orders = orderJpaRepository.findAll();
+        for (Order order : orders) {
+            if (order.getProducts().stream().anyMatch(s -> s.getProductId().equals(id))) {
+                throw new HasRelationException();
+            }
+        }
+        super.deleteById(id);
     }
 }

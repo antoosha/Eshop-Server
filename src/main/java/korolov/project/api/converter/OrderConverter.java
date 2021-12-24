@@ -21,11 +21,11 @@ public class OrderConverter {
 
     public Order toModel(OrderDTO orderDTO) throws EntityStateException {
         List<Product> listOfProducts = new ArrayList<>();
-        for (Long id :orderDTO.getProductIdsDTOs() ) {
+        for (Long id : orderDTO.getProductIdsDTOs()) {
             listOfProducts.add(productService.readById(id).orElseThrow(EntityStateException::new));
         }
 
-        return new Order(orderDTO.getOrderId(), orderDTO.getClientEmail(),listOfProducts);
+        return new Order(orderDTO.getOrderId(), orderDTO.getClientEmail(), listOfProducts);
     }
 
     public OrderDTO fromModel(Order order) {

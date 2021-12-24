@@ -2,7 +2,6 @@ package korolov.project.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,10 +19,10 @@ public class Order {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id")
     )
-    private List<Product> products  = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     public Order(Long orderId, String clientEmail, List<Product> products) {
-        if(orderId != null) this.orderId = orderId;
+        if (orderId != null) this.orderId = orderId;
         this.clientEmail = clientEmail;
         this.products.addAll(products);
     }

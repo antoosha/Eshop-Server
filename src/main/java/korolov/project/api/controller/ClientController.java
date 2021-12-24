@@ -2,8 +2,9 @@ package korolov.project.api.controller;
 
 import korolov.project.api.converter.ClientConverter;
 import korolov.project.api.dto.ClientDTO;
-import korolov.project.business.ClientService;
 import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.api.exceptions.HasRelationException;
+import korolov.project.business.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -63,7 +64,11 @@ public class ClientController {
         if (clientService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client to delete not found");
         }
-        clientService.deleteById(id);
+        try {
+            clientService.deleteById(id);
+        } catch (HasRelationException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Could not to delete client");
+        }
     }
 
 }

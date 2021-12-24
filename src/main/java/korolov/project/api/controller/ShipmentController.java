@@ -4,6 +4,7 @@ package korolov.project.api.controller;
 import korolov.project.api.converter.ShipmentConverter;
 import korolov.project.api.dto.ShipmentDTO;
 import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.api.exceptions.HasRelationException;
 import korolov.project.business.ShipmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +66,10 @@ public class ShipmentController {
         if (shipmentService.readById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Shipment to delete not found");
         }
-        shipmentService.deleteById(id);
+        try {
+            shipmentService.deleteById(id);
+        } catch (HasRelationException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Could not to delete shipment");
+        }
     }
 }

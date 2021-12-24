@@ -22,7 +22,7 @@ public class ClientService extends AbstractCrudService<String, Client> {
      */
     @Override
     public Client create(Client entity) throws EntityStateException {
-        if(!checkIfValid(entity)) {
+        if (!checkIfValid(entity)) {
             throw new EntityStateException();
         }
         entity.setEmail(entity.getEmail().toLowerCase());
@@ -40,7 +40,7 @@ public class ClientService extends AbstractCrudService<String, Client> {
      */
     @Override
     public Client update(Client entity) throws EntityStateException {
-        if(!exists(entity) || !checkIfValid(entity) ){
+        if (!exists(entity) || !checkIfValid(entity)) {
             throw new EntityStateException();
         }
         return super.update(entity);
@@ -51,21 +51,16 @@ public class ClientService extends AbstractCrudService<String, Client> {
         return repository.existsById(entity.getEmail());
     }
 
-
     /**
      * Method to check if all parameters in entity is valid.
      *
      * @param entity to save or update in database
      * @return true if valid, else false
      */
-    private boolean checkIfValid(Client entity){
-        if(entity.getEmail().isEmpty() || entity.getName().isEmpty() || entity.getSurname().isEmpty()
-                || entity.getEmail().isBlank() || entity.getName().isBlank() || entity.getSurname().isBlank()
-                || entity.getName().matches(".*\\d.*") || entity.getSurname().matches(".*\\d.*")
-                || !entity.getEmail().contains("@") )
-        {
-            return false;
-        }
-        return true;
+    private boolean checkIfValid(Client entity) {
+        return !entity.getEmail().isEmpty() && !entity.getName().isEmpty() && !entity.getSurname().isEmpty()
+                && !entity.getEmail().isBlank() && !entity.getName().isBlank() && !entity.getSurname().isBlank()
+                && !entity.getName().matches(".*\\d.*") && !entity.getSurname().matches(".*\\d.*")
+                && entity.getEmail().contains("@");
     }
 }

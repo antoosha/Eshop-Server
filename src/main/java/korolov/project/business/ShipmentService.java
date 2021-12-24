@@ -31,9 +31,8 @@ public class ShipmentService extends AbstractCrudService<Long, Shipment> {
      */
     @Override
     public Shipment create(Shipment entity) throws EntityStateException {
-        if(!orderService.exists(entity.getOrder()) || entity.getClientAddress().isEmpty()
-            || entity.getClientAddress().isBlank() || checkIfAnyShipmentWithOrder(entity.getOrder().getOrderId()))
-        {
+        if (!orderService.exists(entity.getOrder()) || entity.getClientAddress().isEmpty()
+                || entity.getClientAddress().isBlank() || checkIfAnyShipmentWithOrder(entity.getOrder().getOrderId())) {
             throw new EntityStateException();
         }
         return super.create(entity);
@@ -41,9 +40,8 @@ public class ShipmentService extends AbstractCrudService<Long, Shipment> {
 
     @Override
     public Shipment update(Shipment entity) throws EntityStateException {
-        if(!exists(entity) || !orderService.exists(entity.getOrder()) || entity.getClientAddress().isEmpty()
-             || entity.getClientAddress().isBlank())
-        {
+        if (!exists(entity) || !orderService.exists(entity.getOrder()) || entity.getClientAddress().isEmpty()
+                || entity.getClientAddress().isBlank()) {
             throw new EntityStateException();
         }
         return super.update(entity);
@@ -60,10 +58,10 @@ public class ShipmentService extends AbstractCrudService<Long, Shipment> {
      * @param orderId
      * @return true if shipment with current order already exists else return false
      */
-    private boolean checkIfAnyShipmentWithOrder(Long orderId){
+    private boolean checkIfAnyShipmentWithOrder(Long orderId) {
         List<Shipment> shipments = repository.findAll();
         for (Shipment shipment : shipments) {
-            if(shipment.getOrder().getOrderId().equals(orderId)){
+            if (shipment.getOrder().getOrderId().equals(orderId)) {
                 return true;
             }
         }

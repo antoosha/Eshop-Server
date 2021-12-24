@@ -2,7 +2,7 @@
 GET http://localhost:8080/products
 Accept: application/json
 
-### Get one product with id 0
+### Get one product with id 1
 GET http://localhost:8080/products/1
 Accept: application/json
 
@@ -16,18 +16,18 @@ Content-Type: application/json
   "price": 0.99
 }
 
-### Update a product with id 0
+### Update a product with id 1
 PUT http://localhost:8080/products/1
 Accept: application/json
 Content-Type: application/json
 
 {
   "productId": 1,
-  "productName": "Banana",
-  "price": 9.99
+  "productName": "Banana with discount",
+  "price": 0.98
 }
 
-### Delete a product with id 0
+### Delete a product with id 1
 DELETE http://localhost:8080/products/1
 Accept: application/json
 

@@ -1,6 +1,7 @@
 package korolov.project.business;
 
 import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.api.exceptions.HasRelationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public abstract class AbstractCrudService<K, E> {
             throw new EntityStateException(entity);
     }
 
-    public void deleteById(K id) {
+    public void deleteById(K id) throws HasRelationException {
         repository.deleteById(id);
     }
 
