@@ -26,8 +26,11 @@ public class OrderService extends AbstractCrudService<Long, Order> {
     @Autowired
     private ShipmentJpaRepository shipmentJpaRepository;
 
+    private OrderJpaRepository orderJpaRepository;
+
     public OrderService(OrderJpaRepository orderJpaRepository) {
         super(orderJpaRepository);
+        this.orderJpaRepository = orderJpaRepository;
     }
 
     @Override
@@ -65,4 +68,14 @@ public class OrderService extends AbstractCrudService<Long, Order> {
     public boolean exists(Order entity) {
         return repository.existsById(entity.getOrderId());
     }
+
+    public List<Order> findAllByClientEmail(String clientEmail) throws EntityStateException {
+        if(clientEmail.isBlank() || clientEmail.isEmpty()) throw new EntityStateException();
+        return orderJpaRepository.findAllByClientEmail(clientEmail);
+    }
+
+    public List<Order> findAllContainsProduct(Long productId){
+        return orderJpaRepository.findAllByProductsContains(productJpaRepository.getById(productId));
+    }
+
 }

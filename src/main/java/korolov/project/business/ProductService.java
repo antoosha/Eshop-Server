@@ -16,13 +16,14 @@ import java.util.List;
 @Transactional
 public class ProductService extends AbstractCrudService<Long, Product> {
 
-    //TODO cool business logic to not delete but hide the product
-
     @Autowired
     private OrderJpaRepository orderJpaRepository;
 
+    private ProductJpaRepository productJpaRepository;
+
     public ProductService(ProductJpaRepository productJpaRepository) {
         super(productJpaRepository);
+        this.productJpaRepository = productJpaRepository;
     }
 
     /**
@@ -69,5 +70,10 @@ public class ProductService extends AbstractCrudService<Long, Product> {
             }
         }
         super.deleteById(id);
+    }
+
+    public List<Product> findAllWithPriceLessThan(double price) throws EntityStateException{
+        if(price < 0) throw new EntityStateException();
+        return productJpaRepository.findAllByPriceIsLessThanEqual(price);
     }
 }

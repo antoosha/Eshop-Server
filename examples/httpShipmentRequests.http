@@ -6,6 +6,10 @@ Accept: application/json
 GET http://localhost:8080/shipments/1
 Accept: application/json
 
+### Get shipments by client email
+GET http://localhost:8080/shipments/client/emailExample@gmail.com
+Accept: application/json
+
 ### Create a shipment
 POST http://localhost:8080/shipments
 Accept: application/json
