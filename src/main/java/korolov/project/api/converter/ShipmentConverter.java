@@ -1,24 +1,46 @@
 package korolov.project.api.converter;
 
 import korolov.project.api.dto.ShipmentDTO;
+import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.business.OrderService;
 import korolov.project.domain.Shipment;
+import org.springframework.stereotype.Component;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
+@Component
 public class ShipmentConverter {
-    public static Shipment toModel(ShipmentDTO shipmentDTO) {
-        return new Shipment(shipmentDTO.getOrder(), shipmentDTO.getClientAddress(), shipmentDTO.getTrackingNumber());
+
+    private final OrderService orderService;
+
+    public ShipmentConverter(OrderService orderService) {
+        this.orderService = orderService;
     }
 
-    public static ShipmentDTO fromModel(Shipment shipment) {
-        return new ShipmentDTO(shipment.getOrder(), shipment.getClientAddress(), shipment.getTrackingNumber());
+    public Shipment toModel(ShipmentDTO shipmentDTO) throws EntityStateException {
+        return new Shipment(
+                orderService.readById(shipmentDTO.getOrderIdDTO()).orElseThrow(EntityStateException::new),
+                shipmentDTO.getClientAddress(),
+                shipmentDTO.getTrackingNumber());
     }
 
-    public static Collection<Shipment> toModels(Collection<ShipmentDTO> shipmentDTOs) {
-        return shipmentDTOs.stream().map(ShipmentConverter::toModel).toList();
+    public ShipmentDTO fromModel(Shipment shipment) {
+        return new ShipmentDTO(
+                shipment.getOrder().getOrderId(),
+                shipment.getClientAddress(),
+                shipment.getTrackingNumber());
     }
 
-    public static Collection<ShipmentDTO> fromModels(Collection<Shipment> shipments) {
-        return shipments.stream().map(ShipmentConverter::fromModel).toList();
+    public List<Shipment> toModels(List<ShipmentDTO> shipmentDTOs) throws EntityStateException {
+        List<Shipment> resultList = new ArrayList<>();
+        for (ShipmentDTO shipmentDTO : shipmentDTOs) {
+            resultList.add(toModel(shipmentDTO));
+        }
+        return resultList;
+    }
+
+    public List<ShipmentDTO> fromModels(List<Shipment> shipments) {
+        return shipments.stream().map(this::fromModel).toList();
     }
 }

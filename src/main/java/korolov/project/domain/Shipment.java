@@ -6,7 +6,7 @@ import java.util.Objects;
 @Entity(name = "shipment_table")
 public class Shipment {
     @Id
-    //well to do GenerationType.SEQUENCE
+    //better to do GenerationType.SEQUENCE
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shipment_id")
     private Long trackingNumber;
@@ -20,7 +20,7 @@ public class Shipment {
     public Shipment(Order order, String clientAddress, Long trackingNumber) {
         this.order = order;
         this.clientAddress = clientAddress;
-        this.trackingNumber = trackingNumber;
+        if (trackingNumber != null) this.trackingNumber = trackingNumber;
     }
 
     public Shipment() {

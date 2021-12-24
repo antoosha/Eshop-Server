@@ -1,27 +1,30 @@
 package korolov.project.api.dto;
 
-import korolov.project.domain.Order;
-
 public class ShipmentDTO {
-    public Order order;
+    public Long orderIdDTO;
     public String clientAddress;
-    public Long trackingNumber; // primary key in db
+    public Long trackingNumber = 0L; // primary key in db
 
-    public ShipmentDTO(Order order, String clientAddress, Long trackingNumber) {
-        this.order = order;
+    public ShipmentDTO(Long orderIdDTO, String clientAddress, Long trackingNumber) {
+        this.orderIdDTO = orderIdDTO;
         this.clientAddress = clientAddress;
         this.trackingNumber = trackingNumber;
+    }
+
+    public ShipmentDTO(Long orderIdDTO, String clientAddress) {
+        this.orderIdDTO = orderIdDTO;
+        this.clientAddress = clientAddress;
     }
 
     public ShipmentDTO() {
     }
 
-    public Order getOrder() {
-        return order;
+    public Long getOrderIdDTO() {
+        return orderIdDTO;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderIdDTO(Long orderIdDTO) {
+        this.orderIdDTO = orderIdDTO;
     }
 
     public String getClientAddress() {

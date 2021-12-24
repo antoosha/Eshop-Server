@@ -1,18 +1,22 @@
 package korolov.project.api.dto;
 
-import korolov.project.domain.Product;
-
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDTO {
-    public Long orderId; //it is database id
+    public Long orderId = 0L; //it is database id
     public String clientEmail;
-    public Collection<Product> products;
+    public List<Long> productIdsDTOs = new ArrayList<>();
 
-    public OrderDTO(Long orderId, String clientEmail, Collection<Product> products) {
+    public OrderDTO(Long orderId, String clientEmail, List<Long> productIdsDTOs) {
         this.orderId = orderId;
         this.clientEmail = clientEmail;
-        this.products = products;
+        this.productIdsDTOs.addAll(productIdsDTOs);
+    }
+
+    public OrderDTO(String clientEmail, List<Long> productIdsDTOs) {
+        this.clientEmail = clientEmail;
+        this.productIdsDTOs.addAll(productIdsDTOs);
     }
 
     public OrderDTO() {
@@ -34,11 +38,11 @@ public class OrderDTO {
         this.clientEmail = clientEmail;
     }
 
-    public Collection<Product> getProducts() {
-        return products;
+    public List<Long> getProductIdsDTOs() {
+        return productIdsDTOs;
     }
 
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
+    public void setProductIdsDTOs(List<Long> productIdsDTOs) {
+        this.productIdsDTOs = productIdsDTOs;
     }
 }

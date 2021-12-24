@@ -2,8 +2,8 @@
 GET http://localhost:8080/orders
 Accept: application/json
 
-### Get one order with id 0
-GET http://localhost:8080/orders/0
+### Get one order with id 1
+GET http://localhost:8080/orders/1
 Accept: application/json
 
 ### Create an order
@@ -12,24 +12,31 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "orderId": 0,
   "clientEmail": "emailExample@gmail.com",
-  "products":[]
+  "productIdsDTOs":
+  [
+    1
+  ]
 }
 
-### Update an order with id 0
-PUT http://localhost:8080/orders/0
+
+### we could not change order if client has been deleted
+### Update an order with id 1
+PUT http://localhost:8080/orders/1
 Accept: application/json
 Content-Type: application/json
 
 {
-  "orderId": 0,
+  "orderId": 1,
   "clientEmail": "emailExample@gmail.com",
-  "products":[]
+  "productIdsDTOs":
+  [
+    1
+  ]
 }
 
-### Delete an order with id 0
-DELETE http://localhost:8080/orders/0
+### Delete an order with id 1
+DELETE http://localhost:8080/orders/1
 Accept: application/json
 
 

@@ -3,7 +3,7 @@ GET http://localhost:8080/shipments
 Accept: application/json
 
 ### Get one shipment with track number 0
-GET http://localhost:8080/shipments/0
+GET http://localhost:8080/shipments/1
 Accept: application/json
 
 ### Create a shipment
@@ -12,24 +12,23 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "order": {"orderId": 0, "clientEmail":  "emailExample@gmail.com", "products": []},
-  "clientAddress": "Thakurova 9" ,
-  "trackingNumber": 0
+  "orderIdDTO": 1,
+  "clientAddress": "Thakurova 9"
 }
 
 ### Update a shipment with track number 0
-PUT http://localhost:8080/shipments/0
+PUT http://localhost:8080/shipments/1
 Accept: application/json
 Content-Type: application/json
 
 {
-  "order": {"orderId": 0, "clientEmail":  "emailExample@gmail.com", "products": []},
-  "clientAddress": "Thakurova 9" ,
-  "trackingNumber": 0
+  "orderIdDTO": 1,
+  "clientAddress": "Thakurova 9",
+  "trackingNumber": 1
 }
 
 ### Delete a shipment with track number 0
-DELETE http://localhost:8080/shipments/0
+DELETE http://localhost:8080/shipments/1
 Accept: application/json
 
 

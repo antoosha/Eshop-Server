@@ -17,7 +17,7 @@ public class Product {
     public Product(String productName, double price, Long productId) {
         this.productName = productName;
         this.price = price;
-        this.productId = productId;
+        if (productId != null) this.productId = productId;
     }
 
     public Product() {

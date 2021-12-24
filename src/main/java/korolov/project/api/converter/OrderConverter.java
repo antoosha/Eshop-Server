@@ -1,24 +1,50 @@
 package korolov.project.api.converter;
 
 import korolov.project.api.dto.OrderDTO;
+import korolov.project.api.exceptions.EntityStateException;
+import korolov.project.business.ProductService;
 import korolov.project.domain.Order;
+import korolov.project.domain.Product;
+import org.springframework.stereotype.Component;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
+@Component
 public class OrderConverter {
-    public static Order toModel(OrderDTO orderDTO) {
-        return new Order(orderDTO.getOrderId(), orderDTO.getClientEmail(), orderDTO.getProducts());
+
+    private final ProductService productService;
+
+    public OrderConverter(ProductService productService) {
+        this.productService = productService;
     }
 
-    public static OrderDTO fromModel(Order order) {
-        return new OrderDTO(order.getOrderId(), order.getClientEmail(), order.getProducts());
+    public Order toModel(OrderDTO orderDTO) throws EntityStateException {
+        List<Product> listOfProducts = new ArrayList<>();
+        for (Long id : orderDTO.getProductIdsDTOs()) {
+            listOfProducts.add(productService.readById(id).orElseThrow(EntityStateException::new));
+        }
+
+        return new Order(orderDTO.getOrderId(), orderDTO.getClientEmail(), listOfProducts);
     }
 
-    public static Collection<Order> toModels(Collection<OrderDTO> orderDTOs) {
-        return orderDTOs.stream().map(OrderConverter::toModel).toList();
+    public OrderDTO fromModel(Order order) {
+        return new OrderDTO(
+                order.getOrderId(),
+                order.getClientEmail(),
+                order.getProducts().stream().map(Product::getProductId).toList());
     }
 
-    public static Collection<OrderDTO> fromModels(Collection<Order> orders) {
-        return orders.stream().map(OrderConverter::fromModel).toList();
+    public List<Order> toModels(List<OrderDTO> orderDTOs) throws EntityStateException {
+        List<Order> resultList = new ArrayList<>();
+        for (OrderDTO orderDTO : orderDTOs) {
+            resultList.add(toModel(orderDTO));
+        }
+
+        return resultList;
+    }
+
+    public List<OrderDTO> fromModels(List<Order> orders) {
+        return orders.stream().map(this::fromModel).toList();
     }
 }

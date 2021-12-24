@@ -3,7 +3,7 @@ package korolov.project.api.converter;
 import korolov.project.api.dto.ProductDTO;
 import korolov.project.domain.Product;
 
-import java.util.Collection;
+import java.util.List;
 
 public class ProductConverter {
     public static Product toModel(ProductDTO productDTO) {
@@ -14,11 +14,11 @@ public class ProductConverter {
         return new ProductDTO(product.getProductName(), product.getPrice(), product.getProductId());
     }
 
-    public static Collection<Product> toModels(Collection<ProductDTO> productDTOs) {
+    public static List<Product> toModels(List<ProductDTO> productDTOs) {
         return productDTOs.stream().map(ProductConverter::toModel).toList();
     }
 
-    public static Collection<ProductDTO> fromModels(Collection<Product> products) {
+    public static List<ProductDTO> fromModels(List<Product> products) {
         return products.stream().map(ProductConverter::fromModel).toList();
     }
 }
