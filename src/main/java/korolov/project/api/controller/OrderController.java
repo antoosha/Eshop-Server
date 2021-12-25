@@ -71,7 +71,7 @@ public class OrderController {
         try {
             orderDTO = orderConverter.fromModel(orderService.update(orderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
         }
         return orderDTO;
     }
