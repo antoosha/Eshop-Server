@@ -10,8 +10,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -30,8 +32,6 @@ public class OrderRepositoryTests {
 
     @Test
     public void testCreateReadDelete() {
-
-
         List<Product> products = List.of(new Product("Banana", 10, (long)1));
 
         Mockito.when(clientJpaRepository.existsById("akorol6969@gmail.com")).thenReturn(true);

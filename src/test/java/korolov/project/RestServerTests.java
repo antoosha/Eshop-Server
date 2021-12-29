@@ -1,4 +1,4 @@
-package korolov.project.application;
+package korolov.project;
 
 import korolov.project.api.controller.ClientController;
 import korolov.project.api.controller.OrderController;

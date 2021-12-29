@@ -1,4 +1,4 @@
-package korolov.project.controller;
+package korolov.project.api.controller;
 
 import korolov.project.api.controller.ClientController;
 import korolov.project.api.converter.ClientConverter;
@@ -32,9 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ClientControllerTests {
     @MockBean
     ClientService clientService;
-
-    @MockBean
-    ClientConverter clientConverter;
 
     @Autowired
     MockMvc mockMvc;
@@ -128,8 +125,6 @@ public class ClientControllerTests {
                 .andExpect(jsonPath("$.surname", Matchers.is("Korolov")))
                 .andExpect(jsonPath("$.email", Matchers.is("akorol6969@gmail.com")));
 
-
-        Mockito.when(clientService.create(client)).thenReturn(client);
 
         //Verify using ArgumentCaptor, that create has been called 1x.
         ArgumentCaptor<Client> argumentCaptor = ArgumentCaptor.forClass(Client.class);

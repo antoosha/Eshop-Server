@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ProductJpaRepository extends JpaRepository<Product, Long> {
     /**
-     * Find products with price less than input price
+     * Find products with price less than input price.
      *
      * @param price
      * @return

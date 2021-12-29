@@ -26,13 +26,13 @@ public class ShipmentRepositoryTests {
     @Test
     public void testCreateReadDelete() {
 
-        Shipment shipment = new Shipment(null,"akorol6969@gmail.com", (long)1);
+        Shipment shipment = new Shipment(null,"Thakurova 9", (long)1);
 
         Mockito.when(orderService.exists(null)).thenReturn(true);
 
         shipmentJpaRepository.save(shipment);
         List<Shipment> shipments = shipmentJpaRepository.findAll();
-        Assertions.assertThat(shipments).extracting(Shipment::getClientAddress).containsOnly("akorol6969@gmail.com");
+        Assertions.assertThat(shipments).extracting(Shipment::getClientAddress).containsOnly("Thakurova 9");
 
         shipmentJpaRepository.deleteAll();
         Assertions.assertThat(shipmentJpaRepository.findAll()).isEmpty();
