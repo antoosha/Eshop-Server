@@ -154,7 +154,7 @@ public class OrderControllerTests {
         Mockito.when(orderService.create(order)).thenReturn(order);
         Mockito.when(orderService.readById((long)1)).thenReturn(Optional.of(order));
 
-        Mockito.when(orderConverter.fromModel(any())).thenReturn(orderDTO);
+        Mockito.when(orderConverter.fromModel(order)).thenReturn(orderDTO);
         Mockito.when(orderConverter.toModel(any())).thenReturn(order);
         Mockito.when(productService.readById((long)1)).thenReturn(Optional.of(product));
 
