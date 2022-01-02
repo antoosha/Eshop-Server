@@ -3,6 +3,7 @@ package korolov.project.business;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.api.exceptions.HasRelationException;
 import korolov.project.dao.ClientJpaRepository;
+import korolov.project.dao.OrderJpaRepository;
 import korolov.project.dao.ProductJpaRepository;
 import korolov.project.domain.Client;
 import korolov.project.domain.Product;
@@ -15,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +28,15 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTests {
+
     @InjectMocks
     ProductService productService;
 
     @Mock
     ProductJpaRepository productJpaRepository;
+
+    @Mock
+    OrderJpaRepository orderJpaRepository;
 
     @Test
     public void testReadAll() {
@@ -69,12 +75,12 @@ public class ProductServiceTests {
         verify(productJpaRepository, times(1)).findById((long)1);
     }
 
-    //Cannot invoke "korolov.project.dao.OrderJpaRepository.findAll()" because "this.orderJpaRepository" is null
-    /*@Test
+    @Test
     public void testDelete() throws HasRelationException {
+        Mockito.when(orderJpaRepository.findAll()).thenReturn(Collections.emptyList());
         productService.deleteById((long)1);
         verify(productJpaRepository, times(1)).deleteById((long)1);
-    }*/
+    }
 
     @Test
     public void testExists(){
@@ -100,5 +106,16 @@ public class ProductServiceTests {
         assertEquals(1, productProvidedToService.getProductId());
         assertEquals("Banana", productProvidedToService.getProductName());
         assertEquals(10, productProvidedToService.getPrice());
+    }
+
+    @Test
+    public void testFindAllWithPriceLessThanEqual() throws EntityStateException {
+        Product product = new Product("Banana", 10, (long)1);
+        Mockito.when(productJpaRepository.findAllByPriceIsLessThanEqual(10)).thenReturn(List.of(product));
+        List<Product> returnedProducts = productService.findAllWithPriceLessThanEqual(10);
+
+        assertEquals(1, returnedProducts.size());
+        assertEquals("Banana", returnedProducts.get(0).getProductName());
+        assertEquals(10, returnedProducts.get(0).getPrice());
     }
 }

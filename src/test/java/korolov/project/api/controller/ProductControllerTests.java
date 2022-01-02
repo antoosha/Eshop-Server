@@ -118,7 +118,6 @@ public class ProductControllerTests {
         ProductDTO productDTO = new ProductDTO("Banana", 10, (long)1);
 
         Mockito.when(productService.create(product)).thenReturn(product);
-
         Mockito.when(productService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
         Mockito.when(productService.readById((long)1)).thenReturn(Optional.of(product));
 

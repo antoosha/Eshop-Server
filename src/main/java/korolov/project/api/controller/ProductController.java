@@ -49,7 +49,7 @@ public class ProductController {
     @GetMapping("/products/price/less/{price}")
     Collection<ProductDTO> getAllWithPrice(@PathVariable double price) {
         try {
-            return ProductConverter.fromModels(productService.findAllWithPriceLessThan(price));
+            return ProductConverter.fromModels(productService.findAllWithPriceLessThanEqual(price));
         }
         catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price less than 0");

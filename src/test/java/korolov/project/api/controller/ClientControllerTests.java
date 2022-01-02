@@ -141,7 +141,6 @@ public class ClientControllerTests {
         //When calling create with any client, throw exception.
         doThrow(new EntityStateException()).when(clientService).update(any(Client.class));
 
-
         //Try to update not existing client, return HTTP status NOT FOUND.
         mockMvc.perform(put("/clients/akorol6969@gmail.com")
                         .contentType(MediaType.APPLICATION_JSON)

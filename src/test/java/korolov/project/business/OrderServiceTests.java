@@ -36,13 +36,14 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class OrderServiceTests {
+
     @InjectMocks
     OrderService orderService;
 
     @Mock
     OrderJpaRepository orderJpaRepository;
 
-    /*@Mock
+    @Mock
     ClientJpaRepository clientJpaRepository;
 
     @Mock
@@ -50,7 +51,7 @@ public class OrderServiceTests {
 
     @Mock
     ShipmentJpaRepository shipmentJpaRepository;
-*/
+
     @Test
     public void testReadAll() {
         List<Product> products = List.of(new Product("Banana", 10, (long)1));
@@ -66,8 +67,7 @@ public class OrderServiceTests {
         verify(orderJpaRepository, times(1)).findAll();
     }
 
-    //NullPointerException in inner instances
-    /*@Test
+    @Test
     public void testCreate() throws EntityStateException {
         List<Product> products = List.of(new Product("Banana", 10, (long)1));
         Order order = new Order((long)1, "honza@gmail.com", products);
@@ -80,7 +80,7 @@ public class OrderServiceTests {
         verify(orderJpaRepository, times(1)).save(any(Order.class));
         verify(orderJpaRepository, times(1)).save(order);
     }
-    */
+
 
     @Test
     public void testReadOne(){
@@ -97,12 +97,11 @@ public class OrderServiceTests {
         verify(orderJpaRepository, times(1)).findById((long)1);
     }
 
-    //NullPointerException in inner instances
-    /*@Test
+    @Test
     public void testDelete() throws HasRelationException {
         orderService.deleteById((long)1);
         verify(orderJpaRepository, times(1)).deleteById((long)1);
-    }*/
+    }
 
     @Test
     public void testExists(){
@@ -114,12 +113,12 @@ public class OrderServiceTests {
         verify(orderJpaRepository, times(1)).existsById(1L);
     }
 
-    //NullPointerException in inner instances
-    /*@Test
+    @Test
     public void testUpdate() throws EntityStateException {
         List<Product> products = List.of(new Product("Banana", 10, (long)1));
         Order order = new Order((long)1, "honza@gmail.com", products);
         Mockito.when(orderService.exists(order)).thenReturn(true);
+        Mockito.when(clientJpaRepository.existsById("honza@gmail.com")).thenReturn(true);
         orderService.update(order);
 
         verify(orderJpaRepository, times(1)).save(any());
@@ -131,5 +130,37 @@ public class OrderServiceTests {
         Order orderProvidedToService = argumentCaptor.getValue();
         assertEquals(1, orderProvidedToService.getOrderId());
         assertEquals("honza@gmail.com", orderProvidedToService.getClientEmail());
-    }*/
+    }
+
+    @Test
+    public void testFindAllByClientEmail() throws EntityStateException {
+        List<Product> products = List.of(new Product("Banana", 10, (long)1));
+        Order order1 = new Order((long)1, "honza@gmail.com", products);
+        Order order2 = new Order((long)2, "honza@gmail.com", products);
+        List<Order> orders = List.of(order1, order2);
+
+        Mockito.when(orderJpaRepository.findAllByClientEmail("honza@gmail.com")).thenReturn(orders);
+        List<Order> returnedOrders = orderService.findAllByClientEmail("honza@gmail.com");
+        assertEquals(returnedOrders.size(), orders.size());
+        assertEquals(returnedOrders.size(), 2);
+        assertEquals(returnedOrders.get(0).getOrderId(), orders.get(0).getOrderId());
+        assertEquals(returnedOrders.get(1).getOrderId(), orders.get(1).getOrderId());
+    }
+
+    @Test
+    public void testFindAllContainsProduct(){
+        List<Product> products = List.of(new Product("Banana", 10, (long)1));
+        Order order1 = new Order((long)1, "honza@gmail.com", products);
+        Order order2 = new Order((long)2, "honza@gmail.com", products);
+        List<Order> orders = List.of(order1, order2);
+
+        Mockito.when(orderJpaRepository.findAllByProductsContains(products.get(0))).thenReturn(orders);
+        Mockito.when(productJpaRepository.getById(1L)).thenReturn(products.get(0));
+        List<Order> returnedOrders = orderService.findAllContainsProduct((long)1);
+
+        assertEquals(returnedOrders.size(), orders.size());
+        assertEquals(returnedOrders.size(), 2);
+        assertEquals(returnedOrders.get(0).getOrderId(), orders.get(0).getOrderId());
+        assertEquals(returnedOrders.get(1).getOrderId(), orders.get(1).getOrderId());
+    }
 }

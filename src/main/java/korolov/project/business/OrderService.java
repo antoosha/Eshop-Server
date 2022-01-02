@@ -10,6 +10,7 @@ import korolov.project.domain.Order;
 import korolov.project.domain.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,18 +20,18 @@ import java.util.Objects;
 @Transactional
 public class OrderService extends AbstractCrudService<Long, Order> {
 
-    @Autowired
+    private OrderJpaRepository orderJpaRepository;
     private ClientJpaRepository clientJpaRepository;
-    @Autowired
     private ProductJpaRepository productJpaRepository;
-    @Autowired
     private ShipmentJpaRepository shipmentJpaRepository;
 
-    private OrderJpaRepository orderJpaRepository;
-
-    public OrderService(OrderJpaRepository orderJpaRepository) {
+    public OrderService(OrderJpaRepository orderJpaRepository, ClientJpaRepository clientJpaRepository,
+                        ProductJpaRepository productJpaRepository, ShipmentJpaRepository shipmentJpaRepository) {
         super(orderJpaRepository);
         this.orderJpaRepository = orderJpaRepository;
+        this.clientJpaRepository = clientJpaRepository;
+        this.productJpaRepository = productJpaRepository;
+        this.shipmentJpaRepository = shipmentJpaRepository;
     }
 
     @Override

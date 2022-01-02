@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Collection;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ShipmentServiceTests {
+
     @InjectMocks
     ShipmentService shipmentService;
 
@@ -54,18 +56,19 @@ public class ShipmentServiceTests {
         verify(shipmentJpaRepository, times(1)).findAll();
     }
 
-    //Cannot invoke "korolov.project.business.OrderService.exists(korolov.project.domain.Order)" because "this.orderService" is null
-    /*@Test
+    @Test
     public void testCreate() throws EntityStateException {
         List<Product> products = List.of(new Product("Banana", 10, (long)1));
         Order order1 = new Order((long)1, "honza@gmail.com", products);
         Shipment shipment = new Shipment(order1, "Thakurova 9", (long)1);
 
+        Mockito.when(orderService.exists(any())).thenReturn(true);
+
         shipmentService.create(shipment);
         verify(shipmentJpaRepository, times(1)).save(any());
         verify(shipmentJpaRepository, times(1)).save(any(Shipment.class));
         verify(shipmentJpaRepository, times(1)).save(shipment);
-    }*/
+    }
 
     @Test
     public void testReadOne(){
@@ -101,14 +104,14 @@ public class ShipmentServiceTests {
     }
 
     //Cannot invoke "korolov.project.domain.Shipment.getTrackingNumber()" because "entity" is null
-    /*@Test
+    @Test
     public void testUpdate() throws EntityStateException {
         List<Product> products = List.of(new Product("Banana", 10, (long)1));
         Order order1 = new Order((long)1, "honza@gmail.com", products);
         Shipment shipment = new Shipment(order1, "Thakurova 9", (long)1);
 
         Mockito.when(orderService.exists(any())).thenReturn(true);
-        Mockito.when(shipmentService.exists(any())).thenReturn(true);
+        Mockito.when(shipmentJpaRepository.existsById(1L)).thenReturn(true);
         shipmentService.update(shipment);
 
         verify(shipmentJpaRepository, times(1)).save(any());
@@ -121,5 +124,19 @@ public class ShipmentServiceTests {
         assertEquals("Thakurova 9", shipmentProvidedToService.getClientAddress());
         assertEquals(1, shipmentProvidedToService.getTrackingNumber());
         assertEquals(1, shipmentProvidedToService.getOrder().getOrderId());
-    }*/
+    }
+
+    @Test
+    public void testFindAllByClientEmail() throws EntityStateException {
+        List<Product> products = List.of(new Product("Banana", 10, (long)1));
+        Order order1 = new Order((long)1, "honza@gmail.com", products);
+        Shipment shipment = new Shipment(order1, "Thakurova 9", (long)1);
+
+        Mockito.when(shipmentJpaRepository.findAllByOrderClientEmail("honza@gmail.com")).thenReturn(List.of(shipment));
+        List<Shipment> returnedShipments = shipmentService.findAllByClientEmail("honza@gmail.com");
+
+        verify(shipmentJpaRepository, Mockito.times(1)).findAllByOrderClientEmail("honza@gmail.com");
+        assertEquals(1, returnedShipments.size());
+        assertEquals("Thakurova 9", returnedShipments.get(0).getClientAddress());
+    }
 }

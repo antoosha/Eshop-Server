@@ -13,13 +13,12 @@ import java.util.List;
 @Transactional
 public class ShipmentService extends AbstractCrudService<Long, Shipment> {
 
-    @Autowired
     private OrderService orderService;
-
     private ShipmentJpaRepository shipmentJpaRepository;
 
-    public ShipmentService(ShipmentJpaRepository shipmentJpaRepository) {
+    public ShipmentService(OrderService orderService, ShipmentJpaRepository shipmentJpaRepository) {
         super(shipmentJpaRepository);
+        this.orderService = orderService;
         this.shipmentJpaRepository = shipmentJpaRepository;
     }
 
