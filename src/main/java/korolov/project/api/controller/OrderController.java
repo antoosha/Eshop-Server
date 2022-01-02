@@ -28,7 +28,7 @@ public class OrderController {
         try {
             orderDTO = orderConverter.fromModel(orderService.create(orderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already exists or any product does not exist.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Order already exists or any product does not exist.");
         }
         return orderDTO;
     }
@@ -71,7 +71,7 @@ public class OrderController {
         try {
             orderDTO = orderConverter.fromModel(orderService.update(orderConverter.toModel(orderDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
         }
         return orderDTO;
     }
@@ -80,7 +80,7 @@ public class OrderController {
     @DeleteMapping("/orders/{id}")
     void delete(@PathVariable long id) {
         if (orderService.readById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order to delete not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order to delete not found");
         }
         try {
             orderService.deleteById(id);

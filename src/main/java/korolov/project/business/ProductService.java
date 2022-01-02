@@ -16,14 +16,13 @@ import java.util.List;
 @Transactional
 public class ProductService extends AbstractCrudService<Long, Product> {
 
-    @Autowired
+    private ProductJpaRepository productJpaRepository;
     private OrderJpaRepository orderJpaRepository;
 
-    private ProductJpaRepository productJpaRepository;
-
-    public ProductService(ProductJpaRepository productJpaRepository) {
+    public ProductService(ProductJpaRepository productJpaRepository, OrderJpaRepository orderJpaRepository) {
         super(productJpaRepository);
         this.productJpaRepository = productJpaRepository;
+        this.orderJpaRepository = orderJpaRepository;
     }
 
     /**
@@ -72,7 +71,7 @@ public class ProductService extends AbstractCrudService<Long, Product> {
         super.deleteById(id);
     }
 
-    public List<Product> findAllWithPriceLessThan(double price) throws EntityStateException{
+    public List<Product> findAllWithPriceLessThanEqual(double price) throws EntityStateException{
         if(price < 0) throw new EntityStateException();
         return productJpaRepository.findAllByPriceIsLessThanEqual(price);
     }

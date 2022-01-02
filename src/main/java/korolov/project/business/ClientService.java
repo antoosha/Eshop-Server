@@ -4,9 +4,11 @@ import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.dao.ClientJpaRepository;
 import korolov.project.domain.Client;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Component
+@Transactional
 public class ClientService extends AbstractCrudService<String, Client> {
 
     public ClientService(ClientJpaRepository clientJpaRepository) {

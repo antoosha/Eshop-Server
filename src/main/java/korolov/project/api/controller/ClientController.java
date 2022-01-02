@@ -26,7 +26,7 @@ public class ClientController {
         try {
             clientDTO = ClientConverter.fromModel(clientService.create(ClientConverter.toModel(clientDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Client already exists");
         }
         return clientDTO;
     }
@@ -53,7 +53,7 @@ public class ClientController {
         try {
             clientDTO = ClientConverter.fromModel(clientService.update(ClientConverter.toModel(clientDTO)));
         } catch (EntityStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
         }
         return clientDTO;
     }
@@ -62,7 +62,7 @@ public class ClientController {
     @DeleteMapping("/clients/{id}")
     void delete(@PathVariable String id) {
         if (clientService.readById(id).isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Client to delete not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client to delete not found");
         }
         try {
             clientService.deleteById(id);
