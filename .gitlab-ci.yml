@@ -1,0 +1,13 @@
+stages:
+  - build
+
+build-gradle:
+  stage: build
+  except:
+    - java-syntax
+    - pre-DI
+    - DI-manual
+  image: amazoncorretto:16-alpine
+  script:
+    - ./gradlew build
+    - java -Dspring.main.web-application-type=none -jar build/libs/*.jar
