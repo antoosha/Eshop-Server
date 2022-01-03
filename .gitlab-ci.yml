@@ -8,6 +8,7 @@ build:
   stage: build
   script:
     # Maybe build image ?
+    - chmod +x gradlew
     - ./gradlew assemble
   only:
     - master
@@ -21,8 +22,8 @@ test:
     # Configure mysql service (https://hub.docker.com/_/mysql/)
     MYSQL_DATABASE: "tjvdb"
     MYSQL_ROOT_PASSWORD: "root"
-    MYSQL_USER: "root"
-    MYSQL_PASSWORD: "root"
+    #MYSQL_USER: "root"
+    #MYSQL_PASSWORD: "root"
 
     # Configure mysql service for server
     MYSQL_HOST: mysql
@@ -30,4 +31,5 @@ test:
     BACKEND_MYSQL_HOST: postgres
 
   script:
+    - chmod +x gradlew
     - ./gradlew check
