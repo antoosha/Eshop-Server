@@ -9,5 +9,7 @@ build-gradle:
     - DI-manual
   image: amazoncorretto:16-alpine
   script:
-    - ./gradlew build
-    - java -Dspring.main.web-application-type=none -jar build/libs/*.jar
+      - chmod +x gradlew
+      - ./gradlew build
+      - rm -f build/libs/*-plain.jar
+      - java -Dspring.main.web-application-type=none -jar build/libs/*.jar
