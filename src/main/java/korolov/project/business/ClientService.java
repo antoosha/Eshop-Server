@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Component
-@Transactional
 public class ClientService extends AbstractCrudService<String, Client> {
 
     public ClientService(ClientJpaRepository clientJpaRepository) {

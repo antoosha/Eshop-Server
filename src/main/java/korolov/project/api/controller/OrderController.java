@@ -22,7 +22,6 @@ public class OrderController {
         this.orderConverter = orderConverter;
     }
 
-    //CREATE createOrder POST
     @PostMapping("/orders")
     OrderDTO create(@RequestBody OrderDTO orderDTO) {
         try {
@@ -33,13 +32,11 @@ public class OrderController {
         return orderDTO;
     }
 
-    //READ showAllOrders GET
     @GetMapping("/orders")
     List<OrderDTO> getAll() {
         return orderConverter.fromModels(orderService.readAll());
     }
 
-    //READ showOrder GET
     @GetMapping("/orders/{id}")
     OrderDTO getOne(@PathVariable long id) {
         return orderConverter.fromModel(orderService.readById(id).orElseThrow(
@@ -47,7 +44,6 @@ public class OrderController {
         ));
     }
 
-    //READ
     @GetMapping("/orders/client/{email}")
     List<OrderDTO> getByEmail(@PathVariable String email) {
         try {
@@ -57,13 +53,11 @@ public class OrderController {
         }
     }
 
-    //READ
     @GetMapping("/orders/product/{id}")
     List<OrderDTO> getByProductId(@PathVariable long id) {
         return orderConverter.fromModels(orderService.findAllContainsProduct(id));
     }
 
-    //UPDATE editOrder /*change smth in order*/ PUT
     @PutMapping("/orders/{id}")
     OrderDTO update(@PathVariable long id, @RequestBody OrderDTO orderDTO) {
         if (id != orderDTO.getOrderId())
@@ -76,7 +70,6 @@ public class OrderController {
         return orderDTO;
     }
 
-    //DELETE deleteOrder /*canceled*/ DELETE
     @DeleteMapping("/orders/{id}")
     void delete(@PathVariable long id) {
         if (orderService.readById(id).isEmpty()) {

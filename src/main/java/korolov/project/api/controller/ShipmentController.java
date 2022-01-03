@@ -23,7 +23,6 @@ public class ShipmentController {
         this.shipmentConverter = shipmentConverter;
     }
 
-    //CREATE addShipment /* if order is on way*/ POST
     @PostMapping("/shipments")
     ShipmentDTO create(@RequestBody ShipmentDTO shipmentDTO) {
         try {
@@ -34,13 +33,11 @@ public class ShipmentController {
         return shipmentDTO;
     }
 
-    //READ showShipment showAllShipments GET
     @GetMapping("/shipments")
     Collection<ShipmentDTO> getAll() {
         return shipmentConverter.fromModels(shipmentService.readAll());
     }
 
-    //READ
     @GetMapping("/shipments/client/{email}")
     List<ShipmentDTO> getByEmail(@PathVariable String email) {
         try {
@@ -50,7 +47,6 @@ public class ShipmentController {
         }
     }
 
-    //READ showShipment GET
     @GetMapping("/shipments/{id}")
     ShipmentDTO getOne(@PathVariable long id) {
         return shipmentConverter.fromModel(shipmentService.readById(id).orElseThrow(
@@ -58,7 +54,6 @@ public class ShipmentController {
         ));
     }
 
-    //UPDATE editShipment /*for example, tracking number has been changed*/ PUT
     @PutMapping("/shipments/{id}")
     ShipmentDTO update(@PathVariable long id, @RequestBody ShipmentDTO shipmentDTO) {
         if (shipmentDTO.getTrackingNumber() != id)
@@ -71,7 +66,6 @@ public class ShipmentController {
         return shipmentDTO;
     }
 
-    //DELETE deleteShipment /*if client get his/her order*/ DELETE
     @DeleteMapping("/shipments/{id}")
     void delete(@PathVariable long id) {
         if (shipmentService.readById(id).isEmpty()) {

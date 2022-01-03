@@ -3,6 +3,7 @@ package korolov.project.business;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.api.exceptions.HasRelationException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,7 @@ public abstract class AbstractCrudService<K, E> {
      * @param entity entity to be stored
      * @throws EntityStateException if an entity with the same key is already stored
      */
+    @Transactional
     public E create(E entity) throws EntityStateException {
         if (exists(entity))
             throw new EntityStateException(entity);
@@ -51,6 +53,7 @@ public abstract class AbstractCrudService<K, E> {
      * @param entity the new state of the entity to be updated; the instance must contain a key value
      * @throws EntityStateException if the entity cannot be found
      */
+    @Transactional
     public E update(E entity) throws EntityStateException {
         if (exists(entity))
             return repository.save(entity);

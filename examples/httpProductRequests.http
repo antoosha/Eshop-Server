@@ -6,10 +6,6 @@ Accept: application/json
 GET http://localhost:8080/products/1
 Accept: application/json
 
-### Get products with price less than input price
-GET http://localhost:8080/products/price/less/10
-Accept: application/json
-
 ### Create a product
 POST http://localhost:8080/products
 Accept: application/json
@@ -35,5 +31,7 @@ Content-Type: application/json
 DELETE http://localhost:8080/products/1
 Accept: application/json
 
-
-
+###ADDITIONAL
+### Get all products with price less or equal than input price
+GET http://localhost:8080/products/price/less/10
+Accept: application/json

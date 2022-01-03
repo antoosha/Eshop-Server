@@ -6,15 +6,6 @@ Accept: application/json
 GET http://localhost:8080/orders/1
 Accept: application/json
 
-### Get orders by client email
-GET http://localhost:8080/orders/client/emailExample@gmail.com
-Accept: application/json
-
-###Get orders which contains product with this id
-GET http://localhost:8080/orders/product/1
-Accept: application/json
-
-
 ### Create an order
 POST http://localhost:8080/orders
 Accept: application/json
@@ -47,6 +38,16 @@ Content-Type: application/json
 ### Delete an order with id 1
 DELETE http://localhost:8080/orders/1
 Accept: application/json
+
+###ADDITIONAL
+### Get orders by client email
+GET http://localhost:8080/orders/client/emailExample@gmail.com
+Accept: application/json
+
+### Get orders which contains product with id
+GET http://localhost:8080/orders/product/1
+Accept: application/json
+
 
 
 

@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-@Transactional
 public class ProductService extends AbstractCrudService<Long, Product> {
 
     private final ProductJpaRepository productJpaRepository;

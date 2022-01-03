@@ -19,7 +19,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    //CREATE createProduct or addProduct POST
     @PostMapping("/products")
     ProductDTO create(@RequestBody ProductDTO productDTO) {
         try {
@@ -30,13 +29,11 @@ public class ProductController {
         return productDTO;
     }
 
-    //READ showAllProducts GET
     @GetMapping("/products")
     Collection<ProductDTO> getAll() {
         return ProductConverter.fromModels(productService.readAll());
     }
 
-    //READ showProduct GET
     @GetMapping("/products/{id}")
     ProductDTO getOne(@PathVariable long id) {
         return ProductConverter.fromModel(productService.readById(id).orElseThrow(
@@ -44,7 +41,6 @@ public class ProductController {
         ));
     }
 
-    //READ showProduct GET
     @GetMapping("/products/price/less/{price}")
     Collection<ProductDTO> getAllWithPrice(@PathVariable double price) {
         try {
@@ -54,7 +50,6 @@ public class ProductController {
         }
     }
 
-    //UPDATE editProduct PUT
     @PutMapping("/products/{id}")
     ProductDTO update(@PathVariable long id, @RequestBody ProductDTO productDTO) {
         if (productDTO.getProductId() != id)
@@ -67,7 +62,7 @@ public class ProductController {
         return productDTO;
     }
 
-    //DELETE deleteProduct hideProduct/*if we dont want to delete but want to hide from all clients*/ DELETE
+    /*if we dont want to delete but want to hide from all clients*/
     @DeleteMapping("/products/{id}")
     void delete(@PathVariable long id) {
         if (productService.readById(id).isEmpty()) {

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-@Transactional
 public class OrderService extends AbstractCrudService<Long, Order> {
 
     private final OrderJpaRepository orderJpaRepository;

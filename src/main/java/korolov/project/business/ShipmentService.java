@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-@Transactional
 public class ShipmentService extends AbstractCrudService<Long, Shipment> {
 
     private final OrderService orderService;

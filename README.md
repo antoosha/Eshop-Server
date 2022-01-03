@@ -23,3 +23,8 @@ There are some business restrictions, all of them are in services.
 There are some http examples in folder "examples"(! There are not all possible http request. Application has much more possible http requests.)
 
 Junit tests cover controllers, services and dao(wants to add tests covers exceptions and some other business methods).
+
+####Future
+- add admin section
+- add storage of products (if it would be wanted)
+- add Spring Security

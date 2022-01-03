@@ -20,7 +20,6 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    //CREATE createClient /*new client*/ POST
     @PostMapping("/clients")
     ClientDTO create(@RequestBody ClientDTO clientDTO) {
         try {
@@ -31,13 +30,11 @@ public class ClientController {
         return clientDTO;
     }
 
-    //READ showAllClients GET
     @GetMapping("/clients")
     List<ClientDTO> getAll() {
         return ClientConverter.fromModels(clientService.readAll());
     }
 
-    //READ showClient GET
     @GetMapping("/clients/{id}")
     ClientDTO getOne(@PathVariable String id) {
         return ClientConverter.fromModel(clientService.readById(id).orElseThrow(
@@ -45,7 +42,6 @@ public class ClientController {
         ));
     }
 
-    //UPDATE editClient /*edit client info*/ PUT
     @PutMapping("/clients/{id}")
     ClientDTO update(@PathVariable String id, @RequestBody ClientDTO clientDTO) {
         if (!clientDTO.getEmail().equals(id))
@@ -58,7 +54,6 @@ public class ClientController {
         return clientDTO;
     }
 
-    //DELETE deleteClient DELETE
     @DeleteMapping("/clients/{id}")
     void delete(@PathVariable String id) {
         if (clientService.readById(id).isEmpty()) {
