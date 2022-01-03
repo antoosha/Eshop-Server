@@ -6,24 +6,12 @@ build:
   image: amazoncorretto:16-alpine
   stage: build
   script:
-    # Maybe build image ?
     - chmod +x gradlew
     - ./gradlew assemble
 
 test:
   image: amazoncorretto:16-alpine
   stage: test
-  services:
-    - mysql:5.7
-  variables:
-    # Configure mysql service (https://hub.docker.com/_/mysql/)
-    MYSQL_DATABASE: "tjvdb"
-    MYSQL_ROOT_PASSWORD: "root"
-
-    # Configure mysql service for server
-    MYSQL_HOST: mysql
-
-    BACKEND_MYSQL_HOST: postgres
 
   script:
     - chmod +x gradlew

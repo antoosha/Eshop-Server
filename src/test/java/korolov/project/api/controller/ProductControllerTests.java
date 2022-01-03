@@ -1,10 +1,8 @@
 package korolov.project.api.controller;
 
-import korolov.project.api.converter.ProductConverter;
 import korolov.project.api.dto.ProductDTO;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.business.ProductService;
-import korolov.project.domain.Client;
 import korolov.project.domain.Product;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -39,20 +37,20 @@ public class ProductControllerTests {
     //GET ONE
     @Test
     public void testGetOne() throws Exception {
-        Product product = new Product("Banana", 10, (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
 
         //For product with id 1
-        Mockito.when(productService.readById((long)1)).thenReturn(Optional.of(product));
+        Mockito.when(productService.readById((long) 1)).thenReturn(Optional.of(product));
 
         //For existing product
         mockMvc.perform(get("/products/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.productName", Matchers.is("Banana")))
-                .andExpect(jsonPath("$.price", Matchers.is((double)10)))
+                .andExpect(jsonPath("$.price", Matchers.is((double) 10)))
                 .andExpect(jsonPath("$.productId", Matchers.is(1)));
 
         //For anything else then id 1
-        Mockito.when(productService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
+        Mockito.when(productService.readById(not(eq((long) 1)))).thenReturn(Optional.empty());
         //For request to product, that does not exist
         mockMvc.perform(get("/users/2"))
                 .andExpect(status().isNotFound());
@@ -60,9 +58,9 @@ public class ProductControllerTests {
 
     //GET ALL
     @Test
-    public void testGetAll() throws Exception{
-        Product product1 = new Product("Banana", 10, (long)1);
-        Product product2 = new Product("Mango", 15, (long)2);
+    public void testGetAll() throws Exception {
+        Product product1 = new Product("Banana", 10, (long) 1);
+        Product product2 = new Product("Mango", 15, (long) 2);
 
         List<Product> products = List.of(product1, product2);
 
@@ -78,11 +76,11 @@ public class ProductControllerTests {
     //DELETE
     @Test
     public void testDelete() throws Exception {
-        Product product = new Product("Banana", 10, (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
 
         //Mock method readById, because it used to verify existence of product before delete.
-        Mockito.when(productService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
-        Mockito.when(productService.readById((long)1)).thenReturn(Optional.of(product));
+        Mockito.when(productService.readById(not(eq((long) 1)))).thenReturn(Optional.empty());
+        Mockito.when(productService.readById((long) 1)).thenReturn(Optional.of(product));
 
         //If try to delete product who does not exist returns HTTP status Not found...
         mockMvc.perform(get("/product/2"))
@@ -94,7 +92,7 @@ public class ProductControllerTests {
         mockMvc.perform(delete("/products/1"))
                 .andExpect(status().isOk());
         //should be called deleteById
-        verify(productService, times(1)).deleteById((long)1);
+        verify(productService, times(1)).deleteById((long) 1);
     }
 
     //CREATE EXISTING
@@ -114,12 +112,12 @@ public class ProductControllerTests {
     @Test
     public void testCreate() throws Exception {
         //Create product, which should be returned after creating.
-        Product product = new Product("Banana", 10, (long)1);
-        ProductDTO productDTO = new ProductDTO("Banana", 10, (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
+        ProductDTO productDTO = new ProductDTO("Banana", 10, (long) 1);
 
         Mockito.when(productService.create(product)).thenReturn(product);
-        Mockito.when(productService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
-        Mockito.when(productService.readById((long)1)).thenReturn(Optional.of(product));
+        Mockito.when(productService.readById(not(eq((long) 1)))).thenReturn(Optional.empty());
+        Mockito.when(productService.readById((long) 1)).thenReturn(Optional.of(product));
 
         //If try to create product, return HTTP OK and product's data
         mockMvc.perform(post("/products")
@@ -127,7 +125,7 @@ public class ProductControllerTests {
                         .content("{\"productName\":\"Banana\",\"price\": \"10\",\"productId\": \"1\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.productName", Matchers.is("Banana")))
-                .andExpect(jsonPath("$.price", Matchers.is((double)10)))
+                .andExpect(jsonPath("$.price", Matchers.is((double) 10)))
                 .andExpect(jsonPath("$.productId", Matchers.is(1)));
 
 
@@ -158,7 +156,7 @@ public class ProductControllerTests {
     @Test
     public void testUpdate() throws Exception {
         //Create product, which should be returned after creating.
-        Product product = new Product("Banana", 10, (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
 
         Mockito.when(productService.update(product)).thenReturn(product);
 
@@ -168,7 +166,7 @@ public class ProductControllerTests {
                         .content("{\"productName\":\"Banana\",\"price\": \"10\",\"productId\": \"1\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.productName", Matchers.is("Banana")))
-                .andExpect(jsonPath("$.price", Matchers.is((double)10)))
+                .andExpect(jsonPath("$.price", Matchers.is((double) 10)))
                 .andExpect(jsonPath("$.productId", Matchers.is(1)));
 
         Mockito.when(productService.update(product)).thenReturn(product);

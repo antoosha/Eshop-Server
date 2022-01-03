@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,7 +21,7 @@ public class ProductRepositoryTests {
     @Test
     public void testCreateReadDelete() {
 
-        Product product = new Product("Banana", 10, (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
 
         productJpaRepository.save(product);
         List<Product> products = productJpaRepository.findAll();
@@ -32,8 +33,8 @@ public class ProductRepositoryTests {
 
     @Test
     public void testFindAllByPriceIsLessThanEqual() {
-        Product product = new Product("Banana", 10, (long)1);
-        Product product2 = new Product("Banana", 11, (long)2);
+        Product product = new Product("Banana", 10, (long) 1);
+        Product product2 = new Product("Banana", 11, (long) 2);
 
         productJpaRepository.save(product);
         productJpaRepository.save(product2);

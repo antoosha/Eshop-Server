@@ -8,9 +8,7 @@ import korolov.project.dao.ProductJpaRepository;
 import korolov.project.dao.ShipmentJpaRepository;
 import korolov.project.domain.Order;
 import korolov.project.domain.Shipment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,10 +18,10 @@ import java.util.Objects;
 @Transactional
 public class OrderService extends AbstractCrudService<Long, Order> {
 
-    private OrderJpaRepository orderJpaRepository;
-    private ClientJpaRepository clientJpaRepository;
-    private ProductJpaRepository productJpaRepository;
-    private ShipmentJpaRepository shipmentJpaRepository;
+    private final OrderJpaRepository orderJpaRepository;
+    private final ClientJpaRepository clientJpaRepository;
+    private final ProductJpaRepository productJpaRepository;
+    private final ShipmentJpaRepository shipmentJpaRepository;
 
     public OrderService(OrderJpaRepository orderJpaRepository, ClientJpaRepository clientJpaRepository,
                         ProductJpaRepository productJpaRepository, ShipmentJpaRepository shipmentJpaRepository) {
@@ -71,11 +69,11 @@ public class OrderService extends AbstractCrudService<Long, Order> {
     }
 
     public List<Order> findAllByClientEmail(String clientEmail) throws EntityStateException {
-        if(clientEmail.isBlank() || clientEmail.isEmpty()) throw new EntityStateException();
+        if (clientEmail.isBlank() || clientEmail.isEmpty()) throw new EntityStateException();
         return orderJpaRepository.findAllByClientEmail(clientEmail);
     }
 
-    public List<Order> findAllContainsProduct(Long productId){
+    public List<Order> findAllContainsProduct(Long productId) {
         return orderJpaRepository.findAllByProductsContains(productJpaRepository.getById(productId));
     }
 

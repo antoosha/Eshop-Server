@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 public class ProductController {
@@ -50,8 +49,7 @@ public class ProductController {
     Collection<ProductDTO> getAllWithPrice(@PathVariable double price) {
         try {
             return ProductConverter.fromModels(productService.findAllWithPriceLessThanEqual(price));
-        }
-        catch (EntityStateException e) {
+        } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Price less than 0");
         }
     }

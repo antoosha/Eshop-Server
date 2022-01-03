@@ -27,10 +27,9 @@ import static org.mockito.AdditionalMatchers.not;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ShipmentController.class)
 public class ShipmentControllerTests {
@@ -50,13 +49,13 @@ public class ShipmentControllerTests {
     //GET ONE
     @Test
     public void testGetOne() throws Exception {
-        Product product = new Product("Banana", 10, (long)1);
-        Order order = new Order((long)1, "akorol6969@gmail.com", List.of(product));
-        Shipment shipment = new Shipment(order, "Thakurova 9", (long)1);
-        ShipmentDTO shipmentDTO = new ShipmentDTO((long)1, "Thakurova 9", (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
+        Order order = new Order((long) 1, "akorol6969@gmail.com", List.of(product));
+        Shipment shipment = new Shipment(order, "Thakurova 9", (long) 1);
+        ShipmentDTO shipmentDTO = new ShipmentDTO((long) 1, "Thakurova 9", (long) 1);
 
         //For shipment with id 1
-        Mockito.when(shipmentService.readById((long)1)).thenReturn(Optional.of(shipment));
+        Mockito.when(shipmentService.readById((long) 1)).thenReturn(Optional.of(shipment));
         Mockito.when(shipmentConverter.fromModel(shipment)).thenReturn(shipmentDTO);
 
         //For existing product
@@ -67,7 +66,7 @@ public class ShipmentControllerTests {
                 .andExpect(jsonPath("$.trackingNumber", Matchers.is(1)));
 
         //For anything else then id 1
-        Mockito.when(shipmentService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
+        Mockito.when(shipmentService.readById(not(eq((long) 1)))).thenReturn(Optional.empty());
         //For request to shipment, that does not exist
         mockMvc.perform(get("/shipments/2"))
                 .andExpect(status().isNotFound());
@@ -75,16 +74,16 @@ public class ShipmentControllerTests {
 
     //GET ALL
     @Test
-    public void testGetAll() throws Exception{
-        List<Product> products = List.of(new Product("Banana", 10, (long)1));
-        Order order1 = new Order((long)1, "honza@gmail.com", products);
-        Order order2 = new Order((long)2, "akorol6969@gmail.com", products);
-        Shipment shipment1 = new Shipment(order1, "Thakurova 9", (long)1);
-        Shipment shipment2 = new Shipment(order2, "Thakurova 9", (long)2);
+    public void testGetAll() throws Exception {
+        List<Product> products = List.of(new Product("Banana", 10, (long) 1));
+        Order order1 = new Order((long) 1, "honza@gmail.com", products);
+        Order order2 = new Order((long) 2, "akorol6969@gmail.com", products);
+        Shipment shipment1 = new Shipment(order1, "Thakurova 9", (long) 1);
+        Shipment shipment2 = new Shipment(order2, "Thakurova 9", (long) 2);
         List<Shipment> shipments = List.of(shipment1, shipment2);
 
-        ShipmentDTO shipmentDTO1 = new ShipmentDTO((long)1, "Thakurova 9", (long)1);
-        ShipmentDTO shipmentDTO2 = new ShipmentDTO((long)2, "Thakurova 9", (long)2);
+        ShipmentDTO shipmentDTO1 = new ShipmentDTO((long) 1, "Thakurova 9", (long) 1);
+        ShipmentDTO shipmentDTO2 = new ShipmentDTO((long) 2, "Thakurova 9", (long) 2);
         List<ShipmentDTO> shipmentDTOS = List.of(shipmentDTO1, shipmentDTO2);
 
         Mockito.when(shipmentService.readAll()).thenReturn(shipments);
@@ -101,13 +100,13 @@ public class ShipmentControllerTests {
     //DELETE
     @Test
     public void testDelete() throws Exception {
-        List<Product> products = List.of(new Product("Banana", 10, (long)1));
-        Order order = new Order((long)1, "honza@gmail.com", products);
-        Shipment shipment = new Shipment(order, "Thakurova 9", (long)1);
+        List<Product> products = List.of(new Product("Banana", 10, (long) 1));
+        Order order = new Order((long) 1, "honza@gmail.com", products);
+        Shipment shipment = new Shipment(order, "Thakurova 9", (long) 1);
 
         //Mock method readById, because it used to verify existence of order before delete.
-        Mockito.when(shipmentService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
-        Mockito.when(shipmentService.readById((long)1)).thenReturn(Optional.of(shipment));
+        Mockito.when(shipmentService.readById(not(eq((long) 1)))).thenReturn(Optional.empty());
+        Mockito.when(shipmentService.readById((long) 1)).thenReturn(Optional.of(shipment));
 
         //If try to delete shipment that does not exist returns HTTP status Not found...
         mockMvc.perform(get("/shipments/2"))
@@ -119,7 +118,7 @@ public class ShipmentControllerTests {
         mockMvc.perform(delete("/shipments/1"))
                 .andExpect(status().isOk());
         //should be called deleteById
-        verify(shipmentService, times(1)).deleteById((long)1);
+        verify(shipmentService, times(1)).deleteById((long) 1);
     }
 
 
@@ -140,19 +139,19 @@ public class ShipmentControllerTests {
     @Test
     public void testCreate() throws Exception {
         Long l = 1L;
-        Product product = new Product("Banana", 10, (long)1);
-        Order order = new Order((long)1, "akorol6969@gmail.com", List.of(product));
-        OrderDTO orderDTO = new OrderDTO((long)1, "akorol6969@gmail.com", List.of((long)1));
-        Shipment shipment = new Shipment(order, "Thakurova 9", (long)1);
-        ShipmentDTO shipmentDTO = new ShipmentDTO((long)1, "Thakurova 9", (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
+        Order order = new Order((long) 1, "akorol6969@gmail.com", List.of(product));
+        OrderDTO orderDTO = new OrderDTO((long) 1, "akorol6969@gmail.com", List.of((long) 1));
+        Shipment shipment = new Shipment(order, "Thakurova 9", (long) 1);
+        ShipmentDTO shipmentDTO = new ShipmentDTO((long) 1, "Thakurova 9", (long) 1);
 
-        Mockito.when(shipmentService.readById(not(eq((long)1)))).thenReturn(Optional.empty());
-        Mockito.when(shipmentService.readById((long)1)).thenReturn(Optional.of(shipment));
+        Mockito.when(shipmentService.readById(not(eq((long) 1)))).thenReturn(Optional.empty());
+        Mockito.when(shipmentService.readById((long) 1)).thenReturn(Optional.of(shipment));
         Mockito.when(shipmentService.create(shipment)).thenReturn(shipment);
-        Mockito.when(shipmentService.readById((long)1)).thenReturn(Optional.of(shipment));
+        Mockito.when(shipmentService.readById((long) 1)).thenReturn(Optional.of(shipment));
         Mockito.when(shipmentConverter.fromModel(any())).thenReturn(shipmentDTO);
         Mockito.when(shipmentConverter.toModel(any())).thenReturn(shipment);
-        Mockito.when(orderService.readById((long)1)).thenReturn(Optional.of(order));
+        Mockito.when(orderService.readById((long) 1)).thenReturn(Optional.of(order));
 
         mockMvc.perform(post("/shipments")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -167,7 +166,7 @@ public class ShipmentControllerTests {
         Mockito.verify(shipmentService, Mockito.times(1)).create(argumentCaptor.capture());
         Shipment shipmentProvidedToService = argumentCaptor.getValue();
         assertEquals(1, shipmentProvidedToService.getTrackingNumber());
-        assertEquals("Thakurova 9",shipmentProvidedToService.getClientAddress());
+        assertEquals("Thakurova 9", shipmentProvidedToService.getClientAddress());
         assertEquals(1, shipmentProvidedToService.getOrder().getOrderId());
     }
 
@@ -188,17 +187,17 @@ public class ShipmentControllerTests {
     @Test
     public void testUpdate() throws Exception {
         //Create shipment, which should be returned after creating.
-        Product product = new Product("Banana", 10, (long)1);
-        Order order = new Order((long)1, "akorol@gmail.com", List.of(product));
-        OrderDTO orderDTO = new OrderDTO((long)1, "akorol@gmail.com", List.of((long)1));
-        Shipment shipment = new Shipment(order, "Thakurova 9",(long)1);
-        ShipmentDTO shipmentDTO = new ShipmentDTO((long)1, "Thakurova 9", (long)1);
+        Product product = new Product("Banana", 10, (long) 1);
+        Order order = new Order((long) 1, "akorol@gmail.com", List.of(product));
+        OrderDTO orderDTO = new OrderDTO((long) 1, "akorol@gmail.com", List.of((long) 1));
+        Shipment shipment = new Shipment(order, "Thakurova 9", (long) 1);
+        ShipmentDTO shipmentDTO = new ShipmentDTO((long) 1, "Thakurova 9", (long) 1);
 
         Mockito.when(shipmentService.update(any())).thenReturn(shipment);
         Mockito.when(shipmentConverter.fromModel(shipment)).thenReturn(shipmentDTO);
         Mockito.when(shipmentConverter.toModel(shipmentDTO)).thenReturn(shipment);
 
-        Mockito.when(orderService.readById((long)1)).thenReturn(Optional.of(order));
+        Mockito.when(orderService.readById((long) 1)).thenReturn(Optional.of(order));
 
         //If try to update shipment, return HTTP OK and client's data
         mockMvc.perform(put("/shipments/1")

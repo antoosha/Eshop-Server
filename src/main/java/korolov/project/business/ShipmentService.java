@@ -3,7 +3,6 @@ package korolov.project.business;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.dao.ShipmentJpaRepository;
 import korolov.project.domain.Shipment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +12,8 @@ import java.util.List;
 @Transactional
 public class ShipmentService extends AbstractCrudService<Long, Shipment> {
 
-    private OrderService orderService;
-    private ShipmentJpaRepository shipmentJpaRepository;
+    private final OrderService orderService;
+    private final ShipmentJpaRepository shipmentJpaRepository;
 
     public ShipmentService(OrderService orderService, ShipmentJpaRepository shipmentJpaRepository) {
         super(shipmentJpaRepository);
@@ -54,8 +53,8 @@ public class ShipmentService extends AbstractCrudService<Long, Shipment> {
         return repository.existsById(entity.getTrackingNumber());
     }
 
-    public List<Shipment> findAllByClientEmail(String clientEmail) throws EntityStateException{
-        if(clientEmail.isBlank() || clientEmail.isEmpty()) throw new EntityStateException();
+    public List<Shipment> findAllByClientEmail(String clientEmail) throws EntityStateException {
+        if (clientEmail.isBlank() || clientEmail.isEmpty()) throw new EntityStateException();
         return shipmentJpaRepository.findAllByOrderClientEmail(clientEmail);
     }
 

@@ -1,7 +1,5 @@
 package korolov.project.api.controller;
 
-import korolov.project.api.controller.ClientController;
-import korolov.project.api.converter.ClientConverter;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.business.ClientService;
 import korolov.project.domain.Client;
@@ -24,7 +22,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,7 +36,7 @@ public class ClientControllerTests {
     //GET ONE
     @Test
     public void testGetOne() throws Exception {
-        Client client = new Client("Anton", "Korolov","akorol6969@gmail.com");
+        Client client = new Client("Anton", "Korolov", "akorol6969@gmail.com");
         //For client with id "akorol6969@gmail.com"
         Mockito.when(clientService.readById("akorol6969@gmail.com")).thenReturn(Optional.of(client));
         //For existing client
@@ -59,9 +56,9 @@ public class ClientControllerTests {
 
     //GET ALL
     @Test
-    public void testGetAll() throws Exception{
-        Client client1 = new Client("Honza", "Honzik","honza@gmail.com");
-        Client client2 = new Client("Anton", "Korolov","akorol6969@gmail.com");
+    public void testGetAll() throws Exception {
+        Client client1 = new Client("Honza", "Honzik", "honza@gmail.com");
+        Client client2 = new Client("Anton", "Korolov", "akorol6969@gmail.com");
         List<Client> clients = List.of(client1, client2);
 
         Mockito.when(clientService.readAll()).thenReturn(clients);
@@ -76,7 +73,7 @@ public class ClientControllerTests {
     //DELETE
     @Test
     public void testDelete() throws Exception {
-        Client client = new Client("Anton", "Korolov","akorol6969@gmail.com");
+        Client client = new Client("Anton", "Korolov", "akorol6969@gmail.com");
 
         //Mock method readById, because it used to verify existence of clientbefore delete.
         Mockito.when(clientService.readById(not(eq("akorol6969@gmail.com")))).thenReturn(Optional.empty());
@@ -112,7 +109,7 @@ public class ClientControllerTests {
     @Test
     public void testCreate() throws Exception {
         //Create client, which should be returned after creating.
-        Client client = new Client("Anton", "Korolov","akorol6969@gmail.com");
+        Client client = new Client("Anton", "Korolov", "akorol6969@gmail.com");
 
         Mockito.when(clientService.create(client)).thenReturn(client);
 
@@ -133,7 +130,7 @@ public class ClientControllerTests {
         assertEquals("akorol6969@gmail.com", clientProvidedToService.getEmail());
         assertEquals("Anton", clientProvidedToService.getName());
         assertEquals("Korolov", clientProvidedToService.getSurname());
-        }
+    }
 
     //UPDATE
     @Test
@@ -152,7 +149,7 @@ public class ClientControllerTests {
     @Test
     public void testUpdate() throws Exception {
         //Create client, which should be returned after creating.
-        Client client = new Client("Anton", "Koro","akorol6969@gmail.com");
+        Client client = new Client("Anton", "Koro", "akorol6969@gmail.com");
 
         Mockito.when(clientService.update(client)).thenReturn(client);
 

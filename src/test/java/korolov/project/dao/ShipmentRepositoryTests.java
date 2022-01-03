@@ -1,8 +1,6 @@
 package korolov.project.dao;
 
 import korolov.project.business.OrderService;
-import korolov.project.domain.Order;
-import korolov.project.domain.Product;
 import korolov.project.domain.Shipment;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -26,7 +24,7 @@ public class ShipmentRepositoryTests {
     @Test
     public void testCreateReadDelete() {
 
-        Shipment shipment = new Shipment(null,"Thakurova 9", (long)1);
+        Shipment shipment = new Shipment(null, "Thakurova 9", (long) 1);
 
         Mockito.when(orderService.exists(null)).thenReturn(true);
 

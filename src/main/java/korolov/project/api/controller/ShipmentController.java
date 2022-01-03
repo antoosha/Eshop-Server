@@ -2,7 +2,6 @@ package korolov.project.api.controller;
 
 
 import korolov.project.api.converter.ShipmentConverter;
-import korolov.project.api.dto.OrderDTO;
 import korolov.project.api.dto.ShipmentDTO;
 import korolov.project.api.exceptions.EntityStateException;
 import korolov.project.api.exceptions.HasRelationException;
@@ -44,7 +43,7 @@ public class ShipmentController {
     //READ
     @GetMapping("/shipments/client/{email}")
     List<ShipmentDTO> getByEmail(@PathVariable String email) {
-        try{
+        try {
             return shipmentConverter.fromModels(shipmentService.findAllByClientEmail(email));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is not valid");

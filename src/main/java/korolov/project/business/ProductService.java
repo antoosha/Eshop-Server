@@ -6,7 +6,6 @@ import korolov.project.dao.OrderJpaRepository;
 import korolov.project.dao.ProductJpaRepository;
 import korolov.project.domain.Order;
 import korolov.project.domain.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +15,8 @@ import java.util.List;
 @Transactional
 public class ProductService extends AbstractCrudService<Long, Product> {
 
-    private ProductJpaRepository productJpaRepository;
-    private OrderJpaRepository orderJpaRepository;
+    private final ProductJpaRepository productJpaRepository;
+    private final OrderJpaRepository orderJpaRepository;
 
     public ProductService(ProductJpaRepository productJpaRepository, OrderJpaRepository orderJpaRepository) {
         super(productJpaRepository);
@@ -71,8 +70,8 @@ public class ProductService extends AbstractCrudService<Long, Product> {
         super.deleteById(id);
     }
 
-    public List<Product> findAllWithPriceLessThanEqual(double price) throws EntityStateException{
-        if(price < 0) throw new EntityStateException();
+    public List<Product> findAllWithPriceLessThanEqual(double price) throws EntityStateException {
+        if (price < 0) throw new EntityStateException();
         return productJpaRepository.findAllByPriceIsLessThanEqual(price);
     }
 }

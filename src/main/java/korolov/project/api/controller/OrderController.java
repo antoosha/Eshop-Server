@@ -50,8 +50,8 @@ public class OrderController {
     //READ
     @GetMapping("/orders/client/{email}")
     List<OrderDTO> getByEmail(@PathVariable String email) {
-        try{
-             return orderConverter.fromModels(orderService.findAllByClientEmail(email));
+        try {
+            return orderConverter.fromModels(orderService.findAllByClientEmail(email));
         } catch (EntityStateException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email is not valid");
         }

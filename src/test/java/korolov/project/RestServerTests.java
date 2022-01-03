@@ -24,22 +24,22 @@ public class RestServerTests {
     ShipmentController shipmentController;
 
     @Test
-    public void testContextLoadsClientController(){
+    public void testContextLoadsClientController() {
         Assertions.assertThat(clientController).isNotNull();
     }
 
     @Test
-    public void testContextLoadsOrderController(){
+    public void testContextLoadsOrderController() {
         Assertions.assertThat(orderController).isNotNull();
     }
 
     @Test
-    public void testContextLoadsProductController(){
+    public void testContextLoadsProductController() {
         Assertions.assertThat(productController).isNotNull();
     }
 
     @Test
-    public void testContextLoadsShipmentController(){
+    public void testContextLoadsShipmentController() {
         Assertions.assertThat(shipmentController).isNotNull();
     }
 }

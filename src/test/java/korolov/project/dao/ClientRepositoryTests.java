@@ -18,7 +18,7 @@ public class ClientRepositoryTests {
 
     @Test
     public void testCreateReadDelete() {
-        Client client = new Client("Anton", "Korolov","akorol6969@gmail.com");
+        Client client = new Client("Anton", "Korolov", "akorol6969@gmail.com");
 
         clientJpaRepository.save(client);
         List<Client> clients = clientJpaRepository.findAll();
