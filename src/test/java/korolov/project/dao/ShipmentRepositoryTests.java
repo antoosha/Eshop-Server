@@ -17,7 +17,7 @@ import java.util.List;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ShipmentRepositoryTests {
-   /* @Autowired
+    @Autowired
     ShipmentJpaRepository shipmentJpaRepository;
 
     @MockBean
@@ -36,5 +36,5 @@ public class ShipmentRepositoryTests {
 
         shipmentJpaRepository.deleteAll();
         Assertions.assertThat(shipmentJpaRepository.findAll()).isEmpty();
-    }*/
+    }
 }

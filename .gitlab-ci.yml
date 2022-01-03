@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 build-gradle:
   stage: build
@@ -8,12 +9,14 @@ build-gradle:
     - pre-DI
     - DI-manual
   image: amazoncorretto:16-alpine
+
   services:
     - mysql:latest
   variables:
       # Configure mysql environment variables (https://hub.docker.com/_/mysql/)
-      MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: tjvdb
+      MYSQL_ROOT_PASSWORD: root
+
   script:
       - chmod +x gradlew
       - ./gradlew build

@@ -12,7 +12,7 @@ import java.util.List;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ClientRepositoryTests {
-/*
+
     @Autowired
     ClientJpaRepository clientJpaRepository;
 
@@ -26,5 +26,5 @@ public class ClientRepositoryTests {
 
         clientJpaRepository.deleteAll();
         Assertions.assertThat(clientJpaRepository.findAll()).isEmpty();
-    }*/
+    }
 }

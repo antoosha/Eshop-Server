@@ -14,7 +14,7 @@ import java.util.List;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ProductRepositoryTests {
 
-    /*@Autowired
+    @Autowired
     ProductJpaRepository productJpaRepository;
 
     @Test
@@ -41,5 +41,5 @@ public class ProductRepositoryTests {
         org.junit.jupiter.api.Assertions.assertEquals(1, products.size());
         org.junit.jupiter.api.Assertions.assertEquals(products.get(0), product);
 
-    }*/
+    }
 }
