@@ -23,4 +23,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    filter {
+        excludeTestsMatching('korolov.project.dao.*')
+        excludeTestsMatching('korolov.project.RestServerTests')
+    }
 }
