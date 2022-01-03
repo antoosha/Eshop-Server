@@ -1,6 +1,6 @@
 stages:
   - build
-  -
+
 build:
   image: amazoncorretto:16-alpine
   stage: build
