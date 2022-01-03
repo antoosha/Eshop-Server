@@ -18,4 +18,4 @@ build:
   script:
     # Maybe build image ?
     - chmod +x gradlew
-    - ./gradlew assemble
+    - ./gradlew build
