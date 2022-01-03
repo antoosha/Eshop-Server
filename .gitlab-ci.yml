@@ -12,8 +12,8 @@ build-gradle:
     - mysql:latest
   variables:
       # Configure mysql environment variables (https://hub.docker.com/_/mysql/)
-      MYSQL_DATABASE: tjvdb
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
   script:
       - chmod +x gradlew
       - ./gradlew build
