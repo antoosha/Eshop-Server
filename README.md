@@ -1,17 +1,17 @@
-##Eshop
+## Eshop
 Semester project BI-TJV
 
 Author: Anton Korolov
 
-####Database
+#### Database
 Server uses MySQL database, named "tjvdb".
 username = root
 password = root
 
-####Server
+#### Server
 Server runs at http://localhost:8080/
 
-####Description
+#### Description
 Application tries to work as an e-shop. It has 4 entities: Client, Order, Product, Shipment.
 Each client has unique e-mail. Each order, product and shipment have unique ids.
 Client wants to put product to order and then will be created(by administrator or anyone else) shipment to the client address.
@@ -24,7 +24,7 @@ There are some http examples in folder "examples"(! There are not all possible h
 
 Junit tests cover controllers, services and dao(wants to add tests covers exceptions and some other business methods).
 
-####Future
+#### Future
 - add admin section
 - add storage of products (if it would be wanted)
 - add Spring Security
